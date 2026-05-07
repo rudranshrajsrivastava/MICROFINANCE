@@ -85,9 +85,6 @@ export default function LandingPage() {
         </div>
 
         <div className="hero-3d-stage">
-          <div className="floating-cube cube-one"><Boxes size={28} /></div>
-          <div className="floating-cube cube-two"><HandCoins size={28} /></div>
-          <div className="floating-cube cube-three"><Sparkles size={26} /></div>
         <div className="card interactive-card card-3d hero-growth-card relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
           <div className="hero-growth-panel">
