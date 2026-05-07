@@ -39,7 +39,7 @@ const purchaseOrders: PurchaseOrder[] = [
 ];
 
 const loans: Loan[] = [
-  { id: "loan-1", amount: 200000, approvedAmount: 200000, interestRate: 10, termMonths: 12, repaid: 10000, status: "partially_repaid", requestedAt: "2026-05-07T00:32:19.000Z" }
+  { id: "loan-1", bankId: "BANK-001", bankName: "Saathi Bank", amount: 200000, approvedAmount: 200000, interestRate: 10, termMonths: 12, repaid: 10000, status: "partially_repaid", requestedAt: "2026-05-07T00:32:19.000Z" }
 ];
 
 export const emptyUser: UserProfile = {

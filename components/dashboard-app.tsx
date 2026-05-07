@@ -26,6 +26,7 @@ import {
   XCircle
 } from "lucide-react";
 import { Brand } from "./brand";
+import { partnerBanks } from "@/lib/banks";
 import { createBlock, shortHash, verifyChain } from "@/lib/blockchain";
 import { calculateCreditScore, loanLimit } from "@/lib/credit-score";
 import { generateInsights, type InsightCard } from "@/lib/mock-ai";
@@ -238,12 +239,15 @@ function CreditPage({ credit }: { credit: ReturnType<typeof calculateCreditScore
 function LoansPage({ state, credit, update }: { state: AppState; credit: ReturnType<typeof calculateCreditScore>; update: (mutator: (current: AppState) => Promise<AppState> | AppState) => void }) {
   const [amount, setAmount] = useState("");
   const [repay, setRepay] = useState("");
+  const [bankId, setBankId] = useState(partnerBanks[0].id);
   const monthly = credit.netCashFlow / Math.max(credit.activeMonths, 1);
   const limit = loanLimit(credit.creditScore, monthly);
+  const selectedBank = partnerBanks.find((bank) => bank.id === bankId) ?? partnerBanks[0];
   async function requestLoan(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const requested = Number(amount);
-    const loan: Loan = { id: crypto.randomUUID(), amount: requested, approvedAmount: Math.min(requested, limit.limit), interestRate: credit.creditScore >= 750 ? 10 : credit.creditScore >= 650 ? 14 : 18, termMonths: 12, repaid: 0, status: limit.approved && requested <= limit.limit ? "approved" : "rejected", requestedAt: new Date().toISOString() };
+    const bankEligible = credit.creditScore >= selectedBank.minScore && requested <= selectedBank.maxTicket;
+    const loan: Loan = { id: crypto.randomUUID(), bankId: selectedBank.id, bankName: selectedBank.name, amount: requested, approvedAmount: Math.min(requested, limit.limit, selectedBank.maxTicket), interestRate: selectedBank.interestRate, termMonths: 12, repaid: 0, status: limit.approved && bankEligible && requested <= limit.limit ? "approved" : "rejected", requestedAt: new Date().toISOString() };
     update(async (current) => ({ ...current, loans: [loan, ...current.loans], blocks: [...current.blocks, await createBlock(current.blocks, "loan_requested", loan)] }));
     setAmount("");
   }
@@ -258,9 +262,31 @@ function LoansPage({ state, credit, update }: { state: AppState; credit: ReturnT
   }
   return (
     <>
-      <Header eyebrow="Micro-loans" title="Borrow on your chain" subtitle="Auto-approval uses the requested score bands and monthly net cash flow multiples." />
-      <form onSubmit={requestLoan} className="card mb-6 grid gap-4 p-5 md:grid-cols-[1fr_auto]"><label className="field"><span>Requested amount</span><input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} required /></label><button className="btn-primary self-end" type="submit"><Plus size={18} /> Request loan</button><p className="text-slate-600 md:col-span-2">Current policy limit: {limit.approved ? money.format(limit.limit) : "Rejected below 550 score"} · Score {credit.creditScore}</p></form>
-      <section className="grid gap-5">{state.loans.map((loan) => <article className="card p-5" key={loan.id}><div className="flex flex-wrap justify-between gap-4"><div><span className="rounded-full bg-wheat px-4 py-2 font-bold">{loan.status}</span><h2 className="mt-4 text-3xl font-black">{money.format(loan.amount)} · {loan.termMonths} months</h2><p className="text-slate-600">Approved {money.format(loan.approvedAmount)} · {loan.interestRate}% interest · Repaid {money.format(loan.repaid)}</p></div><div className="flex gap-2"><input className="rounded-xl border border-line px-4" placeholder="Repayment" value={repay} onChange={(e) => setRepay(e.target.value)} /><button className="btn-primary" onClick={() => repayLoan(loan.id)}>Repay</button></div></div></article>)}</section>
+      <Header eyebrow="Micro-loans" title="Borrow on your chain" subtitle="Choose a partner bank, compare eligibility, and request working capital. Repayments update your page and the bank dashboard." />
+      <section className="mb-6 grid gap-4 lg:grid-cols-3">
+        {partnerBanks.map((bank) => {
+          const eligible = credit.creditScore >= bank.minScore;
+          return (
+            <button className={`bank-choice-card ${bankId === bank.id ? "bank-choice-card-active" : ""}`} key={bank.id} onClick={() => setBankId(bank.id)} type="button">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <strong>{bank.name}</strong>
+                  <span>{bank.city} · {bank.processingTime}</span>
+                </div>
+                <ShieldCheck className={eligible ? "text-moss" : "text-rust"} />
+              </div>
+              <p>{bank.focus}</p>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <small>Min score <b>{bank.minScore}</b></small>
+                <small>Rate <b>{bank.interestRate}%</b></small>
+                <small>Max <b>{money.format(bank.maxTicket)}</b></small>
+              </div>
+            </button>
+          );
+        })}
+      </section>
+      <form onSubmit={requestLoan} className="card mb-6 grid gap-4 p-5 md:grid-cols-[1fr_auto]"><label className="field"><span>Requested amount from {selectedBank.name}</span><input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} required /></label><button className="btn-primary self-end" type="submit"><Plus size={18} /> Request loan</button><p className="text-slate-600 md:col-span-2">Policy limit: {limit.approved ? money.format(Math.min(limit.limit, selectedBank.maxTicket)) : "Rejected below 550 score"} · Your score {credit.creditScore} · {selectedBank.name} minimum {selectedBank.minScore}</p></form>
+      <section className="grid gap-5">{state.loans.map((loan) => <article className="card p-5" key={loan.id}><div className="flex flex-wrap justify-between gap-4"><div><span className="rounded-full bg-wheat px-4 py-2 font-bold">{loan.status}</span><h2 className="mt-4 text-3xl font-black">{money.format(loan.amount)} · {loan.termMonths} months</h2><p className="text-slate-600">{loan.bankName ?? "Partner Bank"} · Approved {money.format(loan.approvedAmount)} · {loan.interestRate}% interest · Repaid {money.format(loan.repaid)}</p></div><div className="flex gap-2"><input className="rounded-xl border border-line px-4" placeholder="Repayment" value={repay} onChange={(e) => setRepay(e.target.value)} /><button className="btn-primary" onClick={() => repayLoan(loan.id)}>Repay</button></div></div></article>)}</section>
     </>
   );
 }

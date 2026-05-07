@@ -32,6 +32,8 @@ export type Block = {
 
 export type Loan = {
   id: string;
+  bankId?: string;
+  bankName?: string;
   amount: number;
   approvedAmount: number;
   interestRate: number;

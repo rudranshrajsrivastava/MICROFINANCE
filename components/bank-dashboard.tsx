@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, BadgeCheck, Boxes, CheckCircle2, HandCoins, Landmark, Link as LinkIcon, LogOut, ShieldAlert, XCircle } from "lucide-react";
 import { Brand } from "./brand";
+import { partnerBanks } from "@/lib/banks";
 import { createBlock, shortHash, verifyChain } from "@/lib/blockchain";
 import { calculateCreditScore, loanLimit } from "@/lib/credit-score";
 import { initialState, loadState, saveState } from "@/lib/storage";
@@ -56,6 +57,12 @@ export function BankDashboard() {
   const monthly = credit.netCashFlow / Math.max(credit.activeMonths, 1);
   const policy = loanLimit(credit.creditScore, monthly);
   const loanBlocks = state.blocks.filter((block) => block.eventType.includes("loan") || block.eventType.includes("bank"));
+  const bankCode = bank?.lenderCode ?? "BANK-001";
+  const bankLoans = state.loans.filter((loan) => (loan.bankId ?? "BANK-001") === bankCode);
+  const lent = bankLoans.filter((loan) => loan.status !== "rejected").reduce((sum, loan) => sum + loan.approvedAmount, 0);
+  const returned = bankLoans.reduce((sum, loan) => sum + loan.repaid, 0);
+  const outstanding = Math.max(0, lent - returned);
+  const lenderProfile = partnerBanks.find((item) => item.id === bankCode) ?? partnerBanks[0];
 
   function logout() {
     localStorage.removeItem("msme-saathi-bank-session");
@@ -65,14 +72,16 @@ export function BankDashboard() {
   async function decide(loan: Loan, status: LoanStatus) {
     const nextLoan = {
       ...loan,
+      bankId: bankCode,
+      bankName: lenderProfile.name,
       status,
       approvedAmount: status === "rejected" ? 0 : Math.min(loan.amount, policy.limit),
-      interestRate: credit.creditScore >= 750 ? 10 : credit.creditScore >= 650 ? 14 : 18
+      interestRate: lenderProfile.interestRate
     };
     const payload = {
       loanId: loan.id,
-      bankName: bank?.bankName ?? "Partner Bank",
-      lenderCode: bank?.lenderCode ?? "BANK",
+      bankName: lenderProfile.name,
+      lenderCode: bankCode,
       decision: status,
       approvedAmount: nextLoan.approvedAmount,
       creditScore: credit.creditScore,
@@ -113,10 +122,28 @@ export function BankDashboard() {
       </section>
 
       <section className="mx-auto mt-6 grid max-w-7xl gap-5 lg:grid-cols-4">
-        <BankMetric icon={ArrowUpRight} label="Credit score" value={String(credit.creditScore)} note={credit.tier} />
-        <BankMetric icon={HandCoins} label="Policy limit" value={policy.approved ? money.format(policy.limit) : "Rejected"} note={`${policy.multiplier}x monthly cash flow`} />
+        <BankMetric icon={HandCoins} label="Amount lent" value={money.format(lent)} note={`${bankLoans.length} linked requests`} />
+        <BankMetric icon={BadgeCheck} label="Amount returned" value={money.format(returned)} note="Updated when MSME repays" />
+        <BankMetric icon={ArrowUpRight} label="Outstanding" value={money.format(outstanding)} note="Live bank exposure" />
         <BankMetric icon={Boxes} label="Loan blocks" value={String(loanBlocks.length)} note={valid ? "Verified chain" : "Invalid chain"} />
-        <BankMetric icon={BadgeCheck} label="Net cash flow" value={money.format(credit.netCashFlow)} note={`${credit.activeMonths} active months`} />
+      </section>
+
+      <section className="mx-auto mt-6 grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <article className="card p-6">
+          <p className="eyebrow">Lender policy</p>
+          <h2 className="mt-2 text-3xl font-black">{lenderProfile.name}</h2>
+          <p className="mt-3 leading-7 text-slate-600">{lenderProfile.focus}</p>
+          <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+            <span className="rounded-2xl bg-wheat p-3 text-sm">Min score <b className="block text-xl">{lenderProfile.minScore}</b></span>
+            <span className="rounded-2xl bg-wheat p-3 text-sm">Rate <b className="block text-xl">{lenderProfile.interestRate}%</b></span>
+            <span className="rounded-2xl bg-wheat p-3 text-sm">Max <b className="block text-xl">{money.format(lenderProfile.maxTicket)}</b></span>
+          </div>
+        </article>
+        <article className="card p-6">
+          <p className="eyebrow">Current MSME eligibility</p>
+          <h2 className="mt-2 text-3xl font-black">{state.user?.businessName ?? "MSME"} can request {policy.approved ? money.format(Math.min(policy.limit, lenderProfile.maxTicket)) : "no loan yet"}</h2>
+          <p className="mt-3 leading-7 text-slate-600">Score {credit.creditScore} ({credit.tier}) · net cash flow {money.format(credit.netCashFlow)} · platform policy {policy.multiplier}x monthly cash flow.</p>
+        </article>
       </section>
 
       <section className="mx-auto mt-6 grid max-w-7xl gap-4 md:grid-cols-3">
@@ -155,7 +182,7 @@ export function BankDashboard() {
                   <span className="rounded-full bg-wheat px-3 py-1 text-sm font-black">{loan.status}</span>
                   <h3 className="mt-3 text-2xl font-black">{money.format(loan.amount)} requested</h3>
                   <p className="text-slate-600">
-                    {state.user?.businessName ?? "MSME"} · score {credit.creditScore} · eligible up to {policy.approved ? money.format(policy.limit) : "not eligible"}
+                    {state.user?.businessName ?? "MSME"} · {loan.bankName ?? "Partner Bank"} · score {credit.creditScore} · repaid {money.format(loan.repaid)}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">

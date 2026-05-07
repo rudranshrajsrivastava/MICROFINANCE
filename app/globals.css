@@ -369,6 +369,54 @@ select {
     color: #4f46e5;
   }
 
+  .bank-choice-card {
+    display: grid;
+    gap: 0.9rem;
+    width: 100%;
+    border: 1px solid rgba(231, 223, 245, 0.96);
+    border-radius: 1.15rem;
+    background: rgba(255, 255, 255, 0.76);
+    padding: 1.1rem;
+    text-align: left;
+    box-shadow: 0 14px 30px rgba(79, 70, 229, 0.1);
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+
+  .bank-choice-card:hover,
+  .bank-choice-card-active {
+    transform: translateY(-5px);
+    border-color: rgba(79, 70, 229, 0.4);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(245, 243, 255, 0.86));
+    box-shadow: 0 22px 48px rgba(79, 70, 229, 0.17);
+  }
+
+  .bank-choice-card strong,
+  .bank-choice-card span {
+    display: block;
+  }
+
+  .bank-choice-card strong {
+    font-size: 1.15rem;
+    font-weight: 900;
+  }
+
+  .bank-choice-card span,
+  .bank-choice-card p,
+  .bank-choice-card small {
+    color: #64748b;
+  }
+
+  .bank-choice-card small {
+    border-radius: 0.75rem;
+    background: #f0e7ff;
+    padding: 0.55rem;
+  }
+
+  .bank-choice-card b {
+    display: block;
+    color: #4f46e5;
+  }
+
   .motion-headline {
     display: grid;
     gap: 0.08em;
