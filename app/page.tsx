@@ -11,16 +11,16 @@ const features = [
 ];
 
 const msmeRegions = [
-  { region: "North", city: "Delhi NCR", growth: "+18%", x: "45%", y: "23%" },
-  { region: "West", city: "Ahmedabad", growth: "+22%", x: "31%", y: "43%" },
-  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "36%", y: "56%" },
-  { region: "South", city: "Bengaluru", growth: "+31%", x: "47%", y: "75%" },
-  { region: "South", city: "Chennai", growth: "+19%", x: "56%", y: "78%" },
-  { region: "East", city: "Kolkata", growth: "+16%", x: "72%", y: "49%" },
-  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "47%", y: "46%" },
-  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "51%", y: "62%" },
-  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "36%", y: "34%" },
-  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "82%", y: "34%" }
+  { region: "North", city: "Delhi NCR", growth: "+18%", x: "43%", y: "30%" },
+  { region: "West", city: "Ahmedabad", growth: "+22%", x: "28%", y: "46%" },
+  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "34%", y: "57%" },
+  { region: "South", city: "Bengaluru", growth: "+31%", x: "45%", y: "76%" },
+  { region: "South", city: "Chennai", growth: "+19%", x: "55%", y: "80%" },
+  { region: "East", city: "Kolkata", growth: "+16%", x: "69%", y: "50%" },
+  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "45%", y: "49%" },
+  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "50%", y: "65%" },
+  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "35%", y: "37%" },
+  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "82%", y: "36%" }
 ];
 
 export default function LandingPage() {
@@ -143,13 +143,18 @@ export default function LandingPage() {
           </div>
           <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
             <div className="india-map-stage">
-              <svg className="india-map-outline" viewBox="0 0 420 520" role="img" aria-label="Stylized complete map of India">
-                <path className="india-mainland" d="M198 16 171 39 151 65 124 77 112 102 86 115 94 141 72 161 91 187 73 219 92 246 72 279 104 303 104 334 128 355 145 398 168 426 184 492 208 437 234 413 258 441 278 392 311 371 302 337 336 309 321 280 350 250 334 221 354 191 330 166 338 133 303 120 288 85 250 80 228 48 214 21Z" />
-                <path className="india-northeast" d="M317 128 359 108 395 122 381 150 407 169 379 192 343 181 326 157Z" />
-                <circle className="india-island" cx="111" cy="386" r="6" />
-                <circle className="india-island" cx="336" cy="401" r="5" />
-                <circle className="india-island" cx="344" cy="424" r="4" />
-                <circle className="india-island" cx="351" cy="449" r="3.5" />
+              <svg className="india-map-outline" viewBox="0 0 430 520" role="img" aria-label="India outline map with MSME growth markers">
+                <path className="india-mainland" d="M171 10 154 20 150 36 162 49 154 62 133 63 121 77 130 96 116 107 92 113 84 132 65 142 73 158 55 176 71 192 58 209 39 210 31 230 48 240 32 253 46 266 72 263 81 276 71 290 83 305 75 321 85 335 85 358 96 375 101 400 118 420 126 450 144 484 164 503 181 499 197 464 206 426 226 401 253 387 274 358 300 342 315 319 339 309 336 283 354 265 346 244 361 219 346 199 321 194 306 175 282 171 270 153 248 158 233 139 210 135 203 111 186 103 191 83 181 67 198 55 194 37 211 28 197 13Z" />
+                <path className="india-kashmir" d="M167 10 188 2 211 17 229 14 246 31 237 49 215 44 198 55 181 67 162 49 150 36Z" />
+                <path className="india-northeast" d="M316 176 344 157 371 126 401 131 409 154 393 171 413 184 396 205 365 210 346 199 321 194Z" />
+                <path className="india-ne-connector" d="M300 177 316 176" />
+                <circle className="india-island" cx="83" cy="431" r="3.5" />
+                <circle className="india-island" cx="91" cy="445" r="2.8" />
+                <circle className="india-island" cx="346" cy="390" r="2.8" />
+                <circle className="india-island" cx="351" cy="408" r="2.8" />
+                <circle className="india-island" cx="357" cy="428" r="2.6" />
+                <circle className="india-island" cx="363" cy="450" r="2.4" />
+                <circle className="india-island" cx="368" cy="474" r="2.2" />
               </svg>
               {msmeRegions.map((region, index) => (
                 <div
