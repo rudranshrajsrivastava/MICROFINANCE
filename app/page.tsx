@@ -49,8 +49,10 @@ export default function LandingPage() {
         <div className="absolute -left-32 bottom-16 h-72 w-72 rounded-full bg-saffron/30 blur-3xl" />
         <div>
           <p className="eyebrow inline-flex rounded-full border border-moss/20 bg-white/70 px-4 py-2">Private blockchain for MSME finance</p>
-          <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.98] tracking-normal text-ink md:text-7xl">
-            Credit, loans, and supply chain proof on one verified ledger.
+          <h1 className="motion-headline mt-4 max-w-4xl text-5xl font-black leading-[0.98] tracking-normal text-ink md:text-7xl">
+            <span>Credit, loans, and</span>
+            <span className="moving-3d-text">supply chain proof</span>
+            <span>on one verified ledger.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-slate-600">
             msmeSaathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
@@ -61,7 +63,7 @@ export default function LandingPage() {
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/dashboard">Dashboard</Link>
           </div>
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
-            {["30 blocks", "₹4.4L cash flow", "815 score"].map((item) => (
+            {["30 blocks", "INR 4.4L cash flow", "815 score"].map((item) => (
               <div className="glass-band rounded-2xl p-3 text-center text-sm font-black text-forest" key={item}>{item}</div>
             ))}
           </div>
@@ -94,6 +96,19 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+        </div>
+      </section>
+
+      <section className="moving-ribbon mx-auto mb-12 max-w-7xl px-6" aria-label="Platform capabilities">
+        <div className="ribbon-track rounded-3xl border border-line bg-white/70 py-4 shadow-soft backdrop-blur-xl">
+          <div className="ribbon-content">
+            {["Ledger proof", "Credit scoring", "Auto loan readiness", "Supply tracking", "AI insights", "SHA-256 blocks"].map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+            {["Ledger proof", "Credit scoring", "Auto loan readiness", "Supply tracking", "AI insights", "SHA-256 blocks"].map((item) => (
+              <span key={`${item}-copy`}>{item}</span>
+            ))}
+          </div>
         </div>
       </section>
 
