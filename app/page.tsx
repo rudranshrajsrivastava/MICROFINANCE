@@ -11,16 +11,16 @@ const features = [
 ];
 
 const msmeRegions = [
-  { region: "North", city: "Delhi NCR", growth: "+18%", x: "42%", y: "24%", size: "h-5 w-5" },
-  { region: "West", city: "Ahmedabad", growth: "+22%", x: "28%", y: "46%", size: "h-6 w-6" },
-  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "34%", y: "58%", size: "h-7 w-7" },
-  { region: "South", city: "Bengaluru", growth: "+31%", x: "48%", y: "74%", size: "h-7 w-7" },
-  { region: "South", city: "Chennai", growth: "+19%", x: "58%", y: "78%", size: "h-5 w-5" },
-  { region: "East", city: "Kolkata", growth: "+16%", x: "72%", y: "49%", size: "h-5 w-5" },
-  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "48%", y: "48%", size: "h-6 w-6" },
-  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "52%", y: "62%", size: "h-6 w-6" },
-  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "35%", y: "35%", size: "h-5 w-5" },
-  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "84%", y: "37%", size: "h-4 w-4" }
+  { region: "North", city: "Delhi NCR", growth: "+18%", x: "45%", y: "23%", size: "h-5 w-5", tone: "saffron" },
+  { region: "West", city: "Ahmedabad", growth: "+22%", x: "31%", y: "43%", size: "h-6 w-6", tone: "white" },
+  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "36%", y: "56%", size: "h-7 w-7", tone: "green" },
+  { region: "South", city: "Bengaluru", growth: "+31%", x: "47%", y: "75%", size: "h-7 w-7", tone: "saffron" },
+  { region: "South", city: "Chennai", growth: "+19%", x: "56%", y: "78%", size: "h-5 w-5", tone: "white" },
+  { region: "East", city: "Kolkata", growth: "+16%", x: "72%", y: "49%", size: "h-5 w-5", tone: "green" },
+  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "47%", y: "46%", size: "h-6 w-6", tone: "saffron" },
+  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "51%", y: "62%", size: "h-6 w-6", tone: "green" },
+  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "36%", y: "34%", size: "h-5 w-5", tone: "white" },
+  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "82%", y: "34%", size: "h-4 w-4", tone: "saffron" }
 ];
 
 export default function LandingPage() {
@@ -143,8 +143,20 @@ export default function LandingPage() {
           </div>
           <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
             <div className="india-map-stage">
-              <svg className="india-map-outline" viewBox="0 0 320 380" role="img" aria-label="Stylized map of India">
-                <path d="M126 18 98 42l4 35-28 16 14 33-32 28 18 38-26 36 35 25-5 47 42 10 24 50 32-39 39 33 18-52 43-22-20-40 27-34-31-25 18-48-48-12-14-40-41-6-21-33Z" />
+              <svg className="india-map-outline" viewBox="0 0 420 520" role="img" aria-label="Stylized complete map of India">
+                <defs>
+                  <linearGradient id="indiaTricolor" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#ff9933" stopOpacity="0.9" />
+                    <stop offset="48%" stopColor="#ffffff" stopOpacity="0.96" />
+                    <stop offset="100%" stopColor="#138808" stopOpacity="0.72" />
+                  </linearGradient>
+                </defs>
+                <path className="india-mainland" d="M198 16 171 39 151 65 124 77 112 102 86 115 94 141 72 161 91 187 73 219 92 246 72 279 104 303 104 334 128 355 145 398 168 426 184 492 208 437 234 413 258 441 278 392 311 371 302 337 336 309 321 280 350 250 334 221 354 191 330 166 338 133 303 120 288 85 250 80 228 48 214 21Z" />
+                <path className="india-northeast" d="M317 128 359 108 395 122 381 150 407 169 379 192 343 181 326 157Z" />
+                <circle className="india-island" cx="111" cy="386" r="6" />
+                <circle className="india-island" cx="336" cy="401" r="5" />
+                <circle className="india-island" cx="344" cy="424" r="4" />
+                <circle className="india-island" cx="351" cy="449" r="3.5" />
               </svg>
               {msmeRegions.map((region, index) => (
                 <div
@@ -152,7 +164,7 @@ export default function LandingPage() {
                   key={region.city}
                   style={{ left: region.x, top: region.y, animationDelay: `${index * 160}ms` }}
                 >
-                  <span className={`map-dot ${region.size}`} />
+                  <span className={`map-dot map-dot-${region.tone} ${region.size}`} />
                   <span className="map-dot-label">{region.growth}</span>
                 </div>
               ))}

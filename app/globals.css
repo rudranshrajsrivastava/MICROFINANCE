@@ -141,7 +141,7 @@ select {
 
   .india-map-stage {
     position: relative;
-    min-height: 430px;
+    min-height: 500px;
     border-radius: 1.5rem;
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(237, 233, 254, 0.62)),
@@ -153,18 +153,28 @@ select {
 
   .india-map-outline {
     position: absolute;
-    inset: 7% 8%;
-    width: 84%;
-    height: 86%;
+    inset: 1% 2%;
+    width: 96%;
+    height: 98%;
     filter: drop-shadow(0 24px 28px rgba(79, 70, 229, 0.16));
-    transform: rotateX(9deg) rotateY(-6deg) translateZ(18px);
+    transform: rotateX(8deg) rotateY(-5deg) translateZ(18px);
   }
 
-  .india-map-outline path {
-    fill: rgba(237, 233, 254, 0.86);
-    stroke: rgba(79, 70, 229, 0.72);
+  .india-map-outline path,
+  .india-map-outline circle {
+    fill: url("#indiaTricolor");
+    stroke: rgba(0, 0, 128, 0.68);
     stroke-width: 4;
     stroke-linejoin: round;
+  }
+
+  .india-map-outline .india-northeast {
+    stroke-width: 3.5;
+  }
+
+  .india-map-outline .india-island {
+    fill: rgba(19, 136, 8, 0.72);
+    stroke-width: 2.5;
   }
 
   .map-dot-wrap {
@@ -180,8 +190,20 @@ select {
     position: relative;
     display: block;
     border-radius: 999px;
-    background: linear-gradient(135deg, #ec4899, #8b5cf6 52%, #60a5fa);
-    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.12), 0 14px 24px rgba(79, 70, 229, 0.25);
+    border: 2px solid #000080;
+    box-shadow: 0 0 0 8px rgba(0, 0, 128, 0.12), 0 14px 24px rgba(0, 0, 128, 0.24);
+  }
+
+  .map-dot-saffron {
+    background: #ff9933;
+  }
+
+  .map-dot-white {
+    background: #ffffff;
+  }
+
+  .map-dot-green {
+    background: #138808;
   }
 
   .map-dot::after {
@@ -189,7 +211,7 @@ select {
     position: absolute;
     inset: -9px;
     border-radius: inherit;
-    border: 1px solid rgba(139, 92, 246, 0.38);
+    border: 1px solid rgba(0, 0, 128, 0.38);
     animation: mapPulse 2.8s ease-out infinite;
   }
 
@@ -198,7 +220,7 @@ select {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.86);
     padding: 0.18rem 0.5rem;
-    color: #4f46e5;
+    color: #000080;
     font-size: 0.72rem;
     font-weight: 900;
     box-shadow: 0 8px 18px rgba(79, 70, 229, 0.12);
