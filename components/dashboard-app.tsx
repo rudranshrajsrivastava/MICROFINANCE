@@ -35,7 +35,7 @@ import type { AppState, Loan, PurchaseOrder, ShipmentStatus, Supplier, Transacti
 const money = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
 
 const nav = [
-  { href: "/dashboard", label: "Overview", icon: Home },
+  { href: "/user", label: "Overview", icon: Home },
   { href: "/dashboard/transactions", label: "Transactions", icon: ReceiptText },
   { href: "/dashboard/ledger", label: "Blockchain Ledger", icon: Boxes },
   { href: "/dashboard/credit-score", label: "Credit Score", icon: ArrowUpRight },
@@ -108,7 +108,7 @@ export function DashboardApp({ page }: { page: "overview" | "transactions" | "le
         <div className="p-7"><Brand /></div>
         <nav className="border-t border-line p-4">
           {nav.map(({ href, label, icon: Icon }) => {
-            const active = href === "/dashboard" ? pathname === href : pathname.startsWith(href);
+            const active = href === "/user" ? pathname === href || pathname === "/dashboard" : pathname.startsWith(href);
             return (
               <Link key={href} href={href} onClick={() => setNavOpen(false)} className={`mb-2 flex min-h-12 items-center gap-3 rounded-xl px-4 text-lg font-semibold ${active ? "bg-wheat text-ink" : "text-slate-600 hover:bg-wheat/60"}`}>
                 <Icon size={21} /> {label}

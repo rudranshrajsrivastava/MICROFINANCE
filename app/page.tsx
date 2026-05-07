@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
+import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, Landmark, ReceiptText, ShieldCheck, Sparkles, Store, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 import { CountUp } from "@/components/count-up";
 
@@ -44,7 +44,8 @@ export default function LandingPage() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Brand />
         <div className="hidden items-center gap-3 sm:flex">
-          <Link className="btn-ghost" href="/sign-in">Sign In</Link>
+          <Link className="btn-ghost" href="/sign-in">User Sign In</Link>
+          <Link className="btn-ghost" href="/sign-in?role=bank">Bank Sign In</Link>
           <Link className="btn-primary" href="/sign-up">Sign Up</Link>
         </div>
       </nav>
@@ -63,10 +64,23 @@ export default function LandingPage() {
             MSME Saathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up">Start free <ChevronRight size={20} /></Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">MSME Sign In</Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in?role=bank">Bank Portal</Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/dashboard">Dashboard</Link>
+            <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up"><Store size={20} /> User Sign Up <ChevronRight size={20} /></Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">User Sign In</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in?role=bank"><Landmark size={20} /> Bank Sign In</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/user">User Page</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/bank">Bank Page</Link>
+          </div>
+          <div className="mt-6 grid max-w-2xl gap-3 md:grid-cols-2">
+            <article className="portal-card">
+              <Store className="text-moss" />
+              <strong>User/MSME page</strong>
+              <span>Transactions, ledger, credit score, loan requests, supply chain, and AI insights.</span>
+            </article>
+            <article className="portal-card">
+              <Landmark className="text-moss" />
+              <strong>Bank page</strong>
+              <span>On-chain loan request review, eligibility rules, credit checks, and funding decisions.</span>
+            </article>
           </div>
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
             {["30 blocks", "INR 4.4L cash flow", "815 score"].map((item) => (

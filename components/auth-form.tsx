@@ -52,7 +52,7 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
       businessType: user.businessType
     });
     saveState({ ...state, user, blocks: [...state.blocks, block] });
-    router.push("/dashboard");
+    router.push("/user");
   }
 
   const signup = mode === "sign-up";
@@ -74,11 +74,11 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
             <div className="mt-6 grid gap-3">
               <button type="button" className={`role-card ${!bank ? "role-card-active" : ""}`} onClick={() => setRole("msme")}>
                 <Store />
-                <span><strong>MSME business</strong><small>Record activity and request loans</small></span>
+                <span><strong>Sign in as user</strong><small>MSME dashboard, ledger, loans, supply chain</small></span>
               </button>
               <button type="button" className={`role-card ${bank ? "role-card-active" : ""}`} onClick={() => setRole("bank")}>
                 <Landmark />
-                <span><strong>Bank portal</strong><small>Review credit and fund requests</small></span>
+                <span><strong>Sign in as bank</strong><small>Loan review desk, eligibility, chain proof</small></span>
               </button>
             </div>
             <div className="bank-proof-strip mt-7">
@@ -88,7 +88,7 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
           </section>
           <section className="p-7">
         <p className="eyebrow">{bank ? "Bank access" : signup ? "Create account" : "Welcome back"}</p>
-        <h2 className="mt-3 text-3xl font-black">{bank ? "Sign in as lending partner." : signup ? "Create MSME account." : "Continue to dashboard."}</h2>
+        <h2 className="mt-3 text-3xl font-black">{bank ? "Sign in as bank." : signup ? "Create user account." : "Sign in as user."}</h2>
         <div className="mt-7 grid gap-4">
           {bank ? (
             <>
@@ -105,7 +105,7 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
           <label className="field"><span>Email</span><input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required /></label>
           <label className="field"><span>Password</span><input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required /></label>
         </div>
-        <button className="btn-primary mt-6 w-full" type="submit">{bank ? "Open bank review desk" : signup ? "Create account" : "Sign in"}</button>
+        <button className="btn-primary mt-6 w-full" type="submit">{bank ? "Open bank page" : signup ? "Create user account" : "Open user dashboard"}</button>
         <LinkHint mode={mode} bank={bank} />
           </section>
         </div>

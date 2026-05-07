@@ -91,7 +91,7 @@ export function BankDashboard() {
       <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
         <Brand />
         <div className="flex flex-wrap items-center gap-3">
-          <Link className="btn-ghost" href="/dashboard">MSME dashboard</Link>
+          <Link className="btn-ghost" href="/user">User page</Link>
           <button className="btn-ghost" onClick={logout}><LogOut size={18} /> Logout</button>
         </div>
       </nav>
@@ -117,6 +117,24 @@ export function BankDashboard() {
         <BankMetric icon={HandCoins} label="Policy limit" value={policy.approved ? money.format(policy.limit) : "Rejected"} note={`${policy.multiplier}x monthly cash flow`} />
         <BankMetric icon={Boxes} label="Loan blocks" value={String(loanBlocks.length)} note={valid ? "Verified chain" : "Invalid chain"} />
         <BankMetric icon={BadgeCheck} label="Net cash flow" value={money.format(credit.netCashFlow)} note={`${credit.activeMonths} active months`} />
+      </section>
+
+      <section className="mx-auto mt-6 grid max-w-7xl gap-4 md:grid-cols-3">
+        <article className="bank-feature-card">
+          <HandCoins />
+          <strong>Request review</strong>
+          <span>See every MSME loan request with requested amount, current status, and linked business profile.</span>
+        </article>
+        <article className="bank-feature-card">
+          <ArrowUpRight />
+          <strong>Eligibility check</strong>
+          <span>Use live credit score, monthly cash flow, and policy multiplier to judge approval readiness.</span>
+        </article>
+        <article className="bank-feature-card">
+          <Boxes />
+          <strong>Chain proof</strong>
+          <span>Inspect loan blocks, bank decisions, previous hashes, and tamper verification before funding.</span>
+        </article>
       </section>
 
       <section className="mx-auto mt-6 grid max-w-7xl gap-5 xl:grid-cols-[1.1fr_0.9fr]">

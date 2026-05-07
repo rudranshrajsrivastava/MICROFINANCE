@@ -333,6 +333,42 @@ select {
     box-shadow: 0 14px 28px rgba(79, 70, 229, 0.1);
   }
 
+  .portal-card,
+  .bank-feature-card {
+    display: grid;
+    gap: 0.45rem;
+    border: 1px solid rgba(231, 223, 245, 0.96);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.68);
+    padding: 1rem;
+    box-shadow: 0 14px 30px rgba(79, 70, 229, 0.1);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .portal-card:hover,
+  .bank-feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79, 70, 229, 0.3);
+    box-shadow: 0 20px 42px rgba(79, 70, 229, 0.16);
+  }
+
+  .portal-card strong,
+  .bank-feature-card strong {
+    font-size: 1rem;
+    font-weight: 900;
+  }
+
+  .portal-card span,
+  .bank-feature-card span {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .bank-feature-card svg {
+    color: #4f46e5;
+  }
+
   .motion-headline {
     display: grid;
     gap: 0.08em;
