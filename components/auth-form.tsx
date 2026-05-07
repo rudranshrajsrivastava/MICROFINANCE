@@ -43,7 +43,7 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
       <div className="absolute left-5 top-5"><Brand /></div>
       <form onSubmit={submit} className="card w-full max-w-lg p-7">
         <p className="eyebrow">{signup ? "Create account" : "Welcome back"}</p>
-        <h1 className="mt-3 text-4xl font-black">{signup ? "Start your MSME ledger." : "Sign in to msmeSaathi."}</h1>
+        <h1 className="mt-3 text-4xl font-black">{signup ? "Start your MSME ledger." : "Sign in to MSME Saathi."}</h1>
         <div className="mt-7 grid gap-4">
           {signup && (
             <>

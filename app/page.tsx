@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, MapPin, ReceiptText, ShieldCheck, Sparkles, TrendingUp, Truck, Zap } from "lucide-react";
+import Image from "next/image";
+import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -10,17 +11,31 @@ const features = [
   { icon: BrainCircuit, title: "AI insights", tone: "bg-white", body: "Generate deterministic local recommendations with no API key required." }
 ];
 
-const msmeRegions = [
-  { region: "North", city: "Delhi NCR", growth: "+18%", x: "45%", y: "23%" },
-  { region: "West", city: "Ahmedabad", growth: "+22%", x: "31%", y: "43%" },
-  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "36%", y: "56%" },
-  { region: "South", city: "Bengaluru", growth: "+31%", x: "47%", y: "75%" },
-  { region: "South", city: "Chennai", growth: "+19%", x: "56%", y: "78%" },
-  { region: "East", city: "Kolkata", growth: "+16%", x: "72%", y: "49%" },
-  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "47%", y: "46%" },
-  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "51%", y: "62%" },
-  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "36%", y: "34%" },
-  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "82%", y: "34%" }
+const faqs = [
+  {
+    question: "What can I do on MSME Saathi?",
+    answer: "You can create a business profile, record transactions, view a private blockchain ledger, calculate credit score, request loans, track purchase orders, and generate local AI-style insights."
+  },
+  {
+    question: "Does every action create a block?",
+    answer: "Important business events such as transactions, loan requests, repayments, suppliers, purchase orders, and shipment updates are added as SHA-256 linked blocks."
+  },
+  {
+    question: "How does loan approval work?",
+    answer: "Loan readiness is based on the credit score and monthly net cash flow. Higher score bands unlock higher working-capital limits."
+  },
+  {
+    question: "What is the AI Insights page?",
+    answer: "It generates deterministic local recommendations for credit improvement, supply chain risks, working capital, and loan readiness without needing an API key."
+  }
+];
+
+const cityGrowth = [
+  { city: "Bengaluru", segment: "Digital services", growth: 31, value: "INR 8.2L" },
+  { city: "Mumbai-Pune", segment: "Manufacturing", growth: 26, value: "INR 7.6L" },
+  { city: "Hyderabad", segment: "Retail supply", growth: 24, value: "INR 6.9L" },
+  { city: "Ahmedabad", segment: "Textiles", growth: 22, value: "INR 6.4L" },
+  { city: "Delhi NCR", segment: "Trade finance", growth: 18, value: "INR 5.8L" }
 ];
 
 export default function LandingPage() {
@@ -45,7 +60,7 @@ export default function LandingPage() {
             <span>on one verified ledger.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-slate-600">
-            msmeSaathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
+            MSME Saathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up">Start free <ChevronRight size={20} /></Link>
@@ -63,27 +78,35 @@ export default function LandingPage() {
           <div className="floating-cube cube-one"><Boxes size={28} /></div>
           <div className="floating-cube cube-two"><HandCoins size={28} /></div>
           <div className="floating-cube cube-three"><Sparkles size={26} /></div>
-        <div className="card interactive-card card-3d relative overflow-hidden">
+        <div className="card interactive-card card-3d hero-growth-card relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
-          <div className="border-b border-line bg-gradient-to-r from-mint via-wheat to-saffron/40 p-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-moss/30 bg-white px-4 py-2 font-bold text-forest">
-              <BadgeCheck size={18} /> Chain verified
+          <div className="hero-growth-panel">
+            <div className="hero-growth-logo">
+              <Image src="/msme-saathi-logo.png" alt="MSME Saathi logo" width={150} height={110} />
             </div>
-          </div>
-          <div className="grid gap-4 p-6">
-            <div className="rounded-2xl bg-white p-5 shadow-soft">
-              <p className="eyebrow">Credit score</p>
-              <div className="mt-2 flex items-end justify-between">
-                <strong className="text-6xl font-black">815</strong>
-                <span className="rounded-full bg-violet-50 px-4 py-2 font-bold text-forest">Excellent</span>
-              </div>
+            <div className="hero-growth-header">
+              <p className="eyebrow">City growth pulse</p>
+              <h2>MSME growth across active clusters</h2>
             </div>
-            {[0, 1, 2].map((item) => (
-              <div key={item} className="flex items-center justify-between rounded-xl border border-line bg-panel p-4 transition hover:translate-x-1 hover:border-moss">
-                <span className="flex items-center gap-2 font-bold"><Boxes size={18} /> Block #{item + 28}</span>
-                <code className="text-sm text-slate-600">31bbc423...1a4703</code>
-              </div>
-            ))}
+            <div className="city-growth-list">
+              {cityGrowth.map((item) => (
+                <div className="city-growth-row" key={item.city}>
+                  <div>
+                    <strong>{item.city}</strong>
+                    <span>{item.segment}</span>
+                  </div>
+                  <div className="city-growth-meter" aria-label={`${item.city} growth ${item.growth}%`}>
+                    <span style={{ width: `${item.growth * 2.4}%` }} />
+                  </div>
+                  <b>+{item.growth}%</b>
+                </div>
+              ))}
+            </div>
+            <div className="hero-growth-summary">
+              <span><strong>5</strong> city clusters</span>
+              <span><strong>24%</strong> avg growth</span>
+              <span><strong>INR 34.9L</strong> tracked flow</span>
+            </div>
           </div>
         </div>
         </div>
@@ -133,48 +156,24 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="card map-card-3d overflow-hidden p-7">
+        <div className="card faq-card-3d p-7">
           <div className="mb-5 flex items-center gap-3">
-            <MapPin className="text-moss" />
+            <HelpCircle className="text-moss" />
             <div>
-              <p className="eyebrow">India MSME growth</p>
-              <h2 className="text-3xl font-black">Regional demand map</h2>
+              <p className="eyebrow">FAQ</p>
+              <h2 className="text-3xl font-black">Know the site</h2>
             </div>
           </div>
-          <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
-            <div className="india-map-stage">
-              <svg className="india-map-outline" viewBox="0 0 420 520" role="img" aria-label="Stylized complete map of India">
-                <path className="india-mainland" d="M198 16 171 39 151 65 124 77 112 102 86 115 94 141 72 161 91 187 73 219 92 246 72 279 104 303 104 334 128 355 145 398 168 426 184 492 208 437 234 413 258 441 278 392 311 371 302 337 336 309 321 280 350 250 334 221 354 191 330 166 338 133 303 120 288 85 250 80 228 48 214 21Z" />
-                <path className="india-northeast" d="M317 128 359 108 395 122 381 150 407 169 379 192 343 181 326 157Z" />
-                <circle className="india-island" cx="111" cy="386" r="6" />
-                <circle className="india-island" cx="336" cy="401" r="5" />
-                <circle className="india-island" cx="344" cy="424" r="4" />
-                <circle className="india-island" cx="351" cy="449" r="3.5" />
-              </svg>
-              {msmeRegions.map((region, index) => (
-                <div
-                  className="map-dot-wrap"
-                  key={region.city}
-                  style={{ left: region.x, top: region.y, animationDelay: `${index * 160}ms` }}
-                >
-                  <span className="ashoka-dot" />
-                  <span className="map-dot-label">{region.growth}</span>
-                </div>
-              ))}
-            </div>
-            <div className="grid content-center gap-3">
-              {msmeRegions.slice(0, 6).map((region) => (
-                <div className="flex items-center justify-between rounded-2xl border border-line bg-white/75 p-3 shadow-soft" key={region.city}>
-                  <div>
-                    <strong className="block">{region.city}</strong>
-                    <span className="text-sm text-slate-600">{region.region} cluster</span>
-                  </div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-3 py-1 font-black text-forest">
-                    <TrendingUp size={15} /> {region.growth}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-3">
+            {faqs.map((faq) => (
+              <details className="faq-item group" key={faq.question}>
+                <summary>
+                  <span>{faq.question}</span>
+                  <ChevronRight className="shrink-0 transition group-open:rotate-90" size={20} />
+                </summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
