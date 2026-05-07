@@ -204,6 +204,135 @@ select {
     font-size: 1.25rem;
   }
 
+  .auth-card-3d {
+    transform-style: preserve-3d;
+    box-shadow: 0 20px 0 rgba(231, 223, 245, 0.9), 0 36px 86px rgba(79, 70, 229, 0.18);
+  }
+
+  .auth-side-panel {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 18%, rgba(240, 171, 252, 0.34), transparent 12rem),
+      radial-gradient(circle at 88% 75%, rgba(96, 165, 250, 0.36), transparent 13rem),
+      linear-gradient(145deg, rgba(245, 243, 255, 0.96), rgba(219, 234, 254, 0.62));
+  }
+
+  .auth-side-panel::after {
+    content: "";
+    position: absolute;
+    right: -4rem;
+    top: 2rem;
+    width: 12rem;
+    height: 12rem;
+    border: 1.35rem solid rgba(139, 92, 246, 0.12);
+    border-radius: 2.2rem;
+    transform: rotate(18deg);
+  }
+
+  .role-card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    border: 1px solid rgba(231, 223, 245, 0.94);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 1rem;
+    color: #18122b;
+    text-align: left;
+    box-shadow: 0 12px 26px rgba(79, 70, 229, 0.1);
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .role-card:hover,
+  .role-card-active {
+    transform: translateX(5px);
+    border-color: rgba(79, 70, 229, 0.35);
+    box-shadow: 0 16px 34px rgba(79, 70, 229, 0.18);
+  }
+
+  .role-card svg {
+    color: #4f46e5;
+  }
+
+  .role-card span,
+  .role-card small {
+    display: block;
+  }
+
+  .role-card small {
+    margin-top: 0.2rem;
+    color: #64748b;
+  }
+
+  .bank-proof-strip {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.56);
+    padding: 1rem;
+    color: #4f46e5;
+    font-weight: 800;
+  }
+
+  .bank-hero {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    border: 1px solid rgba(231, 223, 245, 0.96);
+    border-radius: 1.5rem;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(240, 171, 252, 0.3), transparent 15rem),
+      radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.3), transparent 16rem),
+      rgba(255, 255, 255, 0.78);
+    box-shadow: 0 24px 70px rgba(79, 70, 229, 0.14);
+  }
+
+  @media (min-width: 900px) {
+    .bank-hero {
+      grid-template-columns: 1fr 20rem;
+    }
+  }
+
+  .bank-id-card {
+    display: grid;
+    gap: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.74);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.68);
+    padding: 1.4rem;
+    box-shadow: inset -10px -10px 20px rgba(139, 92, 246, 0.08), 0 18px 38px rgba(79, 70, 229, 0.16);
+    transform: rotateX(5deg) rotateY(-5deg);
+  }
+
+  .bank-id-card strong {
+    font-size: 1.35rem;
+    font-weight: 900;
+  }
+
+  .bank-id-card span,
+  .bank-id-card small {
+    color: #64748b;
+  }
+
+  .bank-loan-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid rgba(231, 223, 245, 0.96);
+    border-radius: 1.1rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(245, 243, 255, 0.74));
+    padding: 1.1rem;
+    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.1);
+  }
+
   .motion-headline {
     display: grid;
     gap: 0.08em;

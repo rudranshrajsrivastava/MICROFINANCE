@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
+import { CountUp } from "@/components/count-up";
 
 const features = [
   { icon: ReceiptText, title: "Ledger", tone: "bg-mint", body: "Record every sale, purchase, expense, and repayment as a verifiable business event." },
@@ -63,7 +64,8 @@ export default function LandingPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up">Start free <ChevronRight size={20} /></Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">Sign In</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">MSME Sign In</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in?role=bank">Bank Portal</Link>
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/dashboard">Dashboard</Link>
           </div>
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
@@ -95,14 +97,14 @@ export default function LandingPage() {
                   <div className="city-growth-meter" aria-label={`${item.city} growth ${item.growth}%`}>
                     <span style={{ width: `${item.growth * 2.4}%` }} />
                   </div>
-                  <b>+{item.growth}%</b>
+                  <b>+<CountUp value={item.growth} suffix="%" /></b>
                 </div>
               ))}
             </div>
             <div className="hero-growth-summary">
-              <span><strong>5</strong> city clusters</span>
-              <span><strong>24%</strong> avg growth</span>
-              <span><strong>INR 34.9L</strong> tracked flow</span>
+              <span><strong><CountUp value={5} /></strong> city clusters</span>
+              <span><strong><CountUp value={24} suffix="%" /></strong> avg growth</span>
+              <span><strong>INR <CountUp value={35} suffix="L" /></strong> tracked flow</span>
             </div>
           </div>
         </div>
