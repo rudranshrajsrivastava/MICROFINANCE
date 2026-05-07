@@ -8,7 +8,7 @@ import { Brand } from "./brand";
 import { partnerBanks } from "@/lib/banks";
 import { createBlock, shortHash, verifyChain } from "@/lib/blockchain";
 import { calculateCreditScore, loanLimit } from "@/lib/credit-score";
-import { initialState, loadState, saveState } from "@/lib/storage";
+import { initialState, loadPersistedState, savePersistedState } from "@/lib/storage";
 import type { AppState, Loan, LoanStatus } from "@/lib/types";
 
 const money = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
@@ -33,7 +33,7 @@ export function BankDashboard() {
 
   useEffect(() => {
     async function hydrate() {
-      const current = loadState();
+      const current = await loadPersistedState();
       if (current.blocks.length === 0) {
         let blocks = current.blocks;
         blocks = [...blocks, await createBlock(blocks, "genesis", { userId: current.user?.id ?? "demo", businessName: current.user?.businessName ?? "MSME" })];
@@ -50,7 +50,7 @@ export function BankDashboard() {
   useEffect(() => {
     if (!loaded) return;
     verifyChain(state.blocks).then(setValid);
-    saveState(state);
+    savePersistedState(state);
   }, [state, loaded]);
 
   const credit = useMemo(() => calculateCreditScore(state.transactions, state.loans), [state.transactions, state.loans]);

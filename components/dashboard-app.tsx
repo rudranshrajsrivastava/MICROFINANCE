@@ -30,7 +30,7 @@ import { partnerBanks } from "@/lib/banks";
 import { createBlock, shortHash, verifyChain } from "@/lib/blockchain";
 import { calculateCreditScore, loanLimit } from "@/lib/credit-score";
 import { generateInsights, type InsightCard } from "@/lib/mock-ai";
-import { initialState, loadState, saveState } from "@/lib/storage";
+import { initialState, loadPersistedState, savePersistedState } from "@/lib/storage";
 import type { AppState, Loan, PurchaseOrder, ShipmentStatus, Supplier, Transaction, TransactionType } from "@/lib/types";
 
 const money = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
@@ -74,15 +74,15 @@ export function DashboardApp({ page }: { page: "overview" | "transactions" | "le
   const [chainValid, setChainValid] = useState(true);
 
   useEffect(() => {
-    seedBlocks(loadState()).then((next) => {
+    loadPersistedState().then(seedBlocks).then((next) => {
       setState(next);
-      saveState(next);
+      savePersistedState(next);
       setLoaded(true);
     });
   }, []);
 
   useEffect(() => {
-    if (loaded) saveState(state);
+    if (loaded) savePersistedState(state);
     verifyChain(state.blocks).then(setChainValid);
   }, [state, loaded]);
 
@@ -154,7 +154,7 @@ function Header({ eyebrow, title, subtitle, action }: { eyebrow: string; title: 
 function Overview({ credit, sales, purchases, activeLoans, inTransit, blocks }: { credit: ReturnType<typeof calculateCreditScore>; sales: number; purchases: number; activeLoans: number; inTransit: number; blocks: number }) {
   return (
     <>
-      <Header eyebrow="Overview" title="Your business, on-chain." subtitle="Live local data persists in your browser and can be swapped for Supabase/PostgreSQL when environment variables are configured." action={<span className="inline-flex rounded-full border border-line bg-wheat px-4 py-2 font-bold"><Boxes size={18} className="mr-2 text-moss" /> {blocks} blocks minted</span>} />
+      <Header eyebrow="Overview" title="Your business, on-chain." subtitle="Live data persists through MySQL when DATABASE_URL is configured, with browser localStorage fallback for offline demos." action={<span className="inline-flex rounded-full border border-line bg-wheat px-4 py-2 font-bold"><Boxes size={18} className="mr-2 text-moss" /> {blocks} blocks minted</span>} />
       <section className="grid gap-5 xl:grid-cols-4">
         <article className="card p-6 xl:col-span-2">
           <p className="eyebrow">Credit score</p>

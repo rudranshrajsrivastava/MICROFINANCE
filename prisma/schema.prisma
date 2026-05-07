@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum TransactionType {
+  sale
+  purchase
+  expense
+}
+
+enum LoanStatus {
+  approved
+  rejected
+  active
+  partially_repaid
+  repaid
+}
+
+enum ShipmentStatus {
+  created
+  dispatched
+  in_transit
+  delivered
+}
+
+model UserProfile {
+  id           String   @id
+  businessName String
+  email        String   @unique
+  password     String
+  businessType String
+  signedIn     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Transaction {
+  id           String          @id
+  type         TransactionType
+  counterparty String
+  amount       Int
+  category     String
+  date         DateTime
+  createdAt    DateTime        @default(now())
+}
+
+model Block {
+  id           String   @id
+  blockIndex   Int      @unique
+  timestamp    DateTime
+  eventType    String
+  payload      Json
+  previousHash String   @db.Text
+  currentHash  String   @db.Text
+  createdAt    DateTime @default(now())
+}
+
+model Loan {
+  id             String     @id
+  bankId         String?
+  bankName       String?
+  amount         Int
+  approvedAmount Int
+  interestRate   Int
+  termMonths     Int
+  repaid         Int
+  status         LoanStatus
+  requestedAt    DateTime
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Supplier {
+  id        String   @id
+  name      String
+  city      String
+  category  String
+  createdAt DateTime @default(now())
+}
+
+model PurchaseOrder {
+  id           String          @id
+  supplierId   String
+  supplierName String
+  amount       Int
+  items        String
+  status       ShipmentStatus
+  createdAt    DateTime
+  events       ShipmentEvent[]
+}
+
+model ShipmentEvent {
+  id              String         @id
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder  @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  status          ShipmentStatus
+  location        String
+  note            String
+  timestamp       DateTime
+}
+
+model PartnerBank {
+  id             String   @id
+  name           String
+  city           String
+  focus          String
+  minScore       Int
+  maxTicket      Int
+  interestRate   Int
+  processingTime String
+  createdAt      DateTime @default(now())
+}

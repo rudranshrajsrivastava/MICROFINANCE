@@ -70,6 +70,33 @@ export function saveState(state: AppState): void {
   if (typeof window !== "undefined") localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
+export async function loadPersistedState(): Promise<AppState> {
+  if (typeof window === "undefined") return initialState;
+  try {
+    const response = await fetch("/api/state", { cache: "no-store" });
+    if (!response.ok) return loadState();
+    const body = await response.json() as { ok: boolean; state?: AppState };
+    return body.ok && body.state ? body.state : loadState();
+  } catch {
+    return loadState();
+  }
+}
+
+export async function savePersistedState(state: AppState): Promise<void> {
+  saveState(state);
+  if (typeof window === "undefined") return;
+  try {
+    const response = await fetch("/api/state", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(state)
+    });
+    if (!response.ok) saveState(state);
+  } catch {
+    saveState(state);
+  }
+}
+
 export function clearSession(): void {
   if (typeof window !== "undefined") {
     const state = loadState();

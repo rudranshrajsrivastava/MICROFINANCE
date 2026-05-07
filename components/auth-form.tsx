@@ -5,7 +5,7 @@ import { Landmark, ShieldCheck, Store } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Brand } from "./brand";
 import { createBlock } from "@/lib/blockchain";
-import { emptyUser, loadState, saveState } from "@/lib/storage";
+import { emptyUser, loadPersistedState, savePersistedState } from "@/lib/storage";
 
 export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "sign-up"; initialRole?: "msme" | "bank" }) {
   const router = useRouter();
@@ -36,7 +36,7 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
       return;
     }
 
-    const state = loadState();
+    const state = await loadPersistedState();
     const user = {
       ...(state.user ?? emptyUser),
       id: state.user?.id ?? crypto.randomUUID(),
@@ -51,7 +51,7 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
       businessName: user.businessName,
       businessType: user.businessType
     });
-    saveState({ ...state, user, blocks: [...state.blocks, block] });
+    await savePersistedState({ ...state, user, blocks: [...state.blocks, block] });
     router.push("/user");
   }
 
