@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, MapPin, ReceiptText, ShieldCheck, Sparkles, TrendingUp, Truck, Zap } from "lucide-react";
+import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, MapPin, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -141,20 +141,21 @@ export default function LandingPage() {
               <h2 className="text-3xl font-black">Regional demand map</h2>
             </div>
           </div>
-          <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
+          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.9fr]">
             <div className="india-map-stage">
               <svg className="india-map-outline" viewBox="0 0 430 520" role="img" aria-label="India outline map with MSME growth markers">
-                <path className="india-mainland" d="M171 10 154 20 150 36 162 49 154 62 133 63 121 77 130 96 116 107 92 113 84 132 65 142 73 158 55 176 71 192 58 209 39 210 31 230 48 240 32 253 46 266 72 263 81 276 71 290 83 305 75 321 85 335 85 358 96 375 101 400 118 420 126 450 144 484 164 503 181 499 197 464 206 426 226 401 253 387 274 358 300 342 315 319 339 309 336 283 354 265 346 244 361 219 346 199 321 194 306 175 282 171 270 153 248 158 233 139 210 135 203 111 186 103 191 83 181 67 198 55 194 37 211 28 197 13Z" />
-                <path className="india-kashmir" d="M167 10 188 2 211 17 229 14 246 31 237 49 215 44 198 55 181 67 162 49 150 36Z" />
-                <path className="india-northeast" d="M316 176 344 157 371 126 401 131 409 154 393 171 413 184 396 205 365 210 346 199 321 194Z" />
+                <path className="india-mainland" d="M170 9 154 17 148 33 159 45 152 60 131 62 121 75 128 96 115 106 91 112 84 129 64 139 72 157 54 174 68 190 56 207 38 208 31 229 47 240 33 252 45 265 70 262 80 276 70 289 82 304 75 320 84 336 85 358 96 375 101 401 117 421 126 452 145 485 164 504 181 499 196 464 206 427 225 402 253 388 275 359 300 343 315 320 339 309 336 284 354 265 347 245 361 219 346 199 322 194 306 176 283 172 269 154 249 159 233 140 210 136 203 112 186 104 191 84 181 67 198 55 194 38 211 29 197 14Z" />
+                <path className="india-kashmir" d="M168 9 188 2 210 17 229 14 246 31 237 48 215 44 198 55 181 67 159 45 148 33Z" />
+                <path className="india-northeast" d="M316 176 345 156 371 126 401 131 409 154 393 171 413 184 396 205 365 211 346 199 322 194Z" />
                 <path className="india-ne-connector" d="M300 177 316 176" />
-                <circle className="india-island" cx="83" cy="431" r="3.5" />
-                <circle className="india-island" cx="91" cy="445" r="2.8" />
-                <circle className="india-island" cx="346" cy="390" r="2.8" />
-                <circle className="india-island" cx="351" cy="408" r="2.8" />
-                <circle className="india-island" cx="357" cy="428" r="2.6" />
-                <circle className="india-island" cx="363" cy="450" r="2.4" />
-                <circle className="india-island" cx="368" cy="474" r="2.2" />
+                <path className="india-coast-detail" d="M82 304c-8 32-1 66 17 95M102 421c7 20 20 43 39 70M206 427c23-33 50-53 86-79M336 284c-6 19-19 36-35 58" />
+                <circle className="india-island lakshadweep" cx="82" cy="429" r="2.4" />
+                <circle className="india-island lakshadweep" cx="91" cy="446" r="2.1" />
+                <circle className="india-island andaman" cx="346" cy="389" r="2.3" />
+                <circle className="india-island andaman" cx="351" cy="407" r="2.1" />
+                <circle className="india-island andaman" cx="357" cy="427" r="2" />
+                <circle className="india-island andaman" cx="363" cy="450" r="1.9" />
+                <circle className="india-island andaman" cx="368" cy="474" r="1.8" />
               </svg>
               {msmeRegions.map((region, index) => (
                 <div
@@ -167,16 +168,15 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <div className="grid content-center gap-3">
-              {msmeRegions.slice(0, 6).map((region) => (
-                <div className="flex items-center justify-between rounded-2xl border border-line bg-white/75 p-3 shadow-soft" key={region.city}>
-                  <div>
-                    <strong className="block">{region.city}</strong>
-                    <span className="text-sm text-slate-600">{region.region} cluster</span>
+            <div className="msme-timeline">
+              {msmeRegions.map((region, index) => (
+                <div className="timeline-item" key={region.city}>
+                  <span className="timeline-node">{String(index + 1).padStart(2, "0")}</span>
+                  <div className="timeline-copy">
+                    <strong>{region.city}</strong>
+                    <span>{region.region} cluster</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-3 py-1 font-black text-forest">
-                    <TrendingUp size={15} /> {region.growth}
-                  </span>
+                  <b>{region.growth}</b>
                 </div>
               ))}
             </div>
