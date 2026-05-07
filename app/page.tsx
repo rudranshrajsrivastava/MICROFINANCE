@@ -24,10 +24,6 @@ const faqs = [
     answer: "Loan readiness is based on the credit score and monthly net cash flow. Higher score bands unlock higher working-capital limits."
   },
   {
-    question: "Can I use it without a backend?",
-    answer: "Yes. The app keeps working with localStorage fallback data, so forms and dashboard activity persist in the browser."
-  },
-  {
     question: "What is the AI Insights page?",
     answer: "It generates deterministic local recommendations for credit improvement, supply chain risks, working capital, and loan readiness without needing an API key."
   }
