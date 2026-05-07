@@ -30,6 +30,14 @@ const faqs = [
   }
 ];
 
+const cityGrowth = [
+  { city: "Bengaluru", segment: "Digital services", growth: 31, value: "INR 8.2L" },
+  { city: "Mumbai-Pune", segment: "Manufacturing", growth: 26, value: "INR 7.6L" },
+  { city: "Hyderabad", segment: "Retail supply", growth: 24, value: "INR 6.9L" },
+  { city: "Ahmedabad", segment: "Textiles", growth: 22, value: "INR 6.4L" },
+  { city: "Delhi NCR", segment: "Trade finance", growth: 18, value: "INR 5.8L" }
+];
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden">
@@ -70,24 +78,34 @@ export default function LandingPage() {
           <div className="floating-cube cube-one"><Boxes size={28} /></div>
           <div className="floating-cube cube-two"><HandCoins size={28} /></div>
           <div className="floating-cube cube-three"><Sparkles size={26} /></div>
-        <div className="card interactive-card card-3d hero-map-card relative overflow-hidden">
+        <div className="card interactive-card card-3d hero-growth-card relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
-          <div className="hero-map-banner">
-            <svg className="hero-india-map" viewBox="0 0 430 520" role="img" aria-label="India outline with MSME Saathi logo">
-              <path d="M170 9 154 17 148 33 159 45 152 60 131 62 121 75 128 96 115 106 91 112 84 129 64 139 72 157 54 174 68 190 56 207 38 208 31 229 47 240 33 252 45 265 70 262 80 276 70 289 82 304 75 320 84 336 85 358 96 375 101 401 117 421 126 452 145 485 164 504 181 499 196 464 206 427 225 402 253 388 275 359 300 343 315 320 339 309 336 284 354 265 347 245 361 219 346 199 322 194 306 176 283 172 269 154 249 159 233 140 210 136 203 112 186 104 191 84 181 67 198 55 194 38 211 29 197 14Z" />
-              <path d="M168 9 188 2 210 17 229 14 246 31 237 48 215 44 198 55 181 67 159 45 148 33Z" />
-              <path d="M316 176 345 156 371 126 401 131 409 154 393 171 413 184 396 205 365 211 346 199 322 194Z" />
-              <path className="map-connector" d="M300 177 316 176" />
-              <circle cx="82" cy="429" r="2.4" />
-              <circle cx="91" cy="446" r="2.1" />
-              <circle cx="346" cy="389" r="2.3" />
-              <circle cx="351" cy="407" r="2.1" />
-              <circle cx="357" cy="427" r="2" />
-              <circle cx="363" cy="450" r="1.9" />
-              <circle cx="368" cy="474" r="1.8" />
-            </svg>
-            <div className="hero-map-logo">
+          <div className="hero-growth-panel">
+            <div className="hero-growth-logo">
               <Image src="/msme-saathi-logo.png" alt="MSME Saathi logo" width={150} height={110} />
+            </div>
+            <div className="hero-growth-header">
+              <p className="eyebrow">City growth pulse</p>
+              <h2>MSME growth across active clusters</h2>
+            </div>
+            <div className="city-growth-list">
+              {cityGrowth.map((item) => (
+                <div className="city-growth-row" key={item.city}>
+                  <div>
+                    <strong>{item.city}</strong>
+                    <span>{item.segment}</span>
+                  </div>
+                  <div className="city-growth-meter" aria-label={`${item.city} growth ${item.growth}%`}>
+                    <span style={{ width: `${item.growth * 2.4}%` }} />
+                  </div>
+                  <b>+{item.growth}%</b>
+                </div>
+              ))}
+            </div>
+            <div className="hero-growth-summary">
+              <span><strong>5</strong> city clusters</span>
+              <span><strong>24%</strong> avg growth</span>
+              <span><strong>INR 34.9L</strong> tracked flow</span>
             </div>
           </div>
         </div>

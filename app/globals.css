@@ -88,67 +88,133 @@ select {
     perspective: 1100px;
   }
 
-  .hero-map-banner {
+  .hero-growth-panel {
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
     min-height: 540px;
-    place-items: center;
     overflow: hidden;
+    padding: 1.45rem;
     background:
-      radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.94), transparent 11rem),
-      radial-gradient(circle at 16% 18%, rgba(240, 171, 252, 0.24), transparent 12rem),
+      radial-gradient(circle at 28% 10%, rgba(255, 255, 255, 0.96), transparent 10rem),
+      radial-gradient(circle at 18% 18%, rgba(240, 171, 252, 0.24), transparent 12rem),
       radial-gradient(circle at 88% 78%, rgba(96, 165, 250, 0.26), transparent 13rem),
       linear-gradient(135deg, rgba(251, 247, 255, 0.98), rgba(237, 233, 254, 0.72) 48%, rgba(219, 234, 254, 0.62));
   }
 
-  .hero-map-card {
+  .hero-growth-card {
     min-height: 540px;
   }
 
-  .hero-india-map {
-    position: absolute;
-    inset: -7% 2% -8% 1%;
-    width: 98%;
-    height: 116%;
-    opacity: 0.56;
-    filter: drop-shadow(0 24px 30px rgba(79, 70, 229, 0.16));
-    transform: rotateX(4deg) rotateY(-3deg) translateZ(20px);
-  }
-
-  .hero-india-map path,
-  .hero-india-map circle {
-    fill: rgba(255, 255, 255, 0.72);
-    stroke: rgba(79, 70, 229, 0.66);
-    stroke-width: 2.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .hero-india-map .map-connector {
-    fill: none;
-    stroke-dasharray: 3 5;
-  }
-
-  .hero-map-logo {
+  .hero-growth-logo {
     position: relative;
-    z-index: 2;
     display: grid;
-    width: 13rem;
-    height: 9.8rem;
+    width: 9.25rem;
+    height: 6.6rem;
     place-items: center;
     overflow: hidden;
     border: 1px solid rgba(231, 223, 245, 0.95);
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
     background: rgba(255, 255, 255, 0.88);
-    box-shadow: inset -12px -12px 22px rgba(79, 70, 229, 0.08), inset 10px 10px 18px rgba(255, 255, 255, 0.84), 0 28px 50px rgba(79, 70, 229, 0.24);
-    transform: translateZ(48px) rotateX(4deg) rotateY(-5deg);
+    box-shadow: inset -10px -10px 18px rgba(79, 70, 229, 0.08), inset 8px 8px 16px rgba(255, 255, 255, 0.84), 0 22px 38px rgba(79, 70, 229, 0.18);
+    transform: translateZ(36px) rotateX(4deg) rotateY(-5deg);
   }
 
-  .hero-map-logo img {
+  .hero-growth-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transform: scale(1.2);
+    transform: scale(1.18);
+  }
+
+  .hero-growth-header h2 {
+    margin-top: 0.35rem;
+    max-width: 25rem;
+    color: #18122b;
+    font-size: clamp(1.85rem, 4vw, 2.75rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .city-growth-list {
+    display: grid;
+    gap: 0.78rem;
+    margin-top: 0.35rem;
+  }
+
+  .city-growth-row {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) minmax(7rem, 1.25fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    border: 1px solid rgba(231, 223, 245, 0.96);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.74);
+    padding: 0.85rem;
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.1);
+    transform: translateZ(20px);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .city-growth-row:hover {
+    transform: translateX(5px) translateZ(28px);
+    box-shadow: 0 18px 34px rgba(79, 70, 229, 0.16);
+  }
+
+  .city-growth-row strong,
+  .city-growth-row span {
+    display: block;
+  }
+
+  .city-growth-row span {
+    color: #64748b;
+    font-size: 0.82rem;
+  }
+
+  .city-growth-row b {
+    border-radius: 999px;
+    background: #f5f3ff;
+    padding: 0.35rem 0.62rem;
+    color: #4f46e5;
+    font-size: 0.92rem;
+  }
+
+  .city-growth-meter {
+    height: 0.72rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(231, 223, 245, 0.95);
+  }
+
+  .city-growth-meter span {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #8b5cf6, #60a5fa);
+  }
+
+  .hero-growth-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    margin-top: auto;
+  }
+
+  .hero-growth-summary span {
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.58);
+    padding: 0.75rem;
+    color: #64748b;
+    font-size: 0.78rem;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.1);
+  }
+
+  .hero-growth-summary strong {
+    display: block;
+    color: #4f46e5;
+    font-size: 1.25rem;
   }
 
   .motion-headline {
