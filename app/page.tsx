@@ -1,18 +1,41 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, HandCoins, ReceiptText, ShieldCheck, Truck } from "lucide-react";
+import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
-  { icon: ReceiptText, title: "Ledger", body: "Record every sale, purchase, expense, and repayment as a verifiable business event." },
-  { icon: ShieldCheck, title: "Credit scoring", body: "Use transparent on-chain behavior instead of collateral-heavy paperwork." },
-  { icon: HandCoins, title: "Loans", body: "Auto-approve working-capital requests from the current score and monthly cash flow." },
-  { icon: Truck, title: "Supply chain", body: "Track suppliers, purchase orders, and shipment milestones from creation to delivery." },
-  { icon: BrainCircuit, title: "AI insights", body: "Generate deterministic local recommendations with no API key required." }
+  { icon: ReceiptText, title: "Ledger", tone: "bg-mint", body: "Record every sale, purchase, expense, and repayment as a verifiable business event." },
+  { icon: ShieldCheck, title: "Credit scoring", tone: "bg-skyglass", body: "Use transparent on-chain behavior instead of collateral-heavy paperwork." },
+  { icon: HandCoins, title: "Loans", tone: "bg-roseglass", body: "Auto-approve working-capital requests from the current score and monthly cash flow." },
+  { icon: Truck, title: "Supply chain", tone: "bg-amber/25", body: "Track suppliers, purchase orders, and shipment milestones from creation to delivery." },
+  { icon: BrainCircuit, title: "AI insights", tone: "bg-white", body: "Generate deterministic local recommendations with no API key required." }
+];
+
+const faqs = [
+  {
+    question: "What is MSME Chain?",
+    answer: "MSME Chain is a microfinance dashboard for small businesses. It tracks business transactions, creates private blockchain blocks, calculates credit scores, and supports loan and supply-chain workflows."
+  },
+  {
+    question: "Do I need a crypto wallet?",
+    answer: "No. The app uses a wallet-free private ledger simulation. Blocks are linked with SHA-256 hashes, so users can understand blockchain-style auditability without handling tokens or wallets."
+  },
+  {
+    question: "Will my data persist?",
+    answer: "Yes. When Supabase or PostgreSQL environment variables are not configured, the app stores demo and user-created data in browser localStorage."
+  },
+  {
+    question: "How is the credit score calculated?",
+    answer: "The score uses transaction volume, transaction count, active months, positive cash flow, repayment history, and default penalties. The methodology is visible on the Credit Score page."
+  },
+  {
+    question: "Can this connect to a real backend?",
+    answer: "Yes. The project includes typed models, a Supabase client helper, and a PostgreSQL-ready schema in supabase/schema.sql."
+  }
 ];
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-hidden">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Brand />
         <div className="hidden items-center gap-3 sm:flex">
@@ -21,9 +44,11 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="mx-auto grid min-h-[calc(100vh-160px)] max-w-7xl items-center gap-10 px-6 py-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="relative mx-auto grid min-h-[calc(100vh-160px)] max-w-7xl items-center gap-10 px-6 py-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="absolute -right-28 top-10 h-72 w-72 rounded-full bg-mint/70 blur-3xl" />
+        <div className="absolute -left-32 bottom-16 h-72 w-72 rounded-full bg-saffron/30 blur-3xl" />
         <div>
-          <p className="eyebrow">Private blockchain for MSME finance</p>
+          <p className="eyebrow inline-flex rounded-full border border-moss/20 bg-white/70 px-4 py-2">Private blockchain for MSME finance</p>
           <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.98] tracking-normal text-ink md:text-7xl">
             Credit, loans, and supply chain proof on one verified ledger.
           </h1>
@@ -35,16 +60,22 @@ export default function LandingPage() {
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">Sign In</Link>
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/dashboard">Dashboard</Link>
           </div>
+          <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
+            {["30 blocks", "₹4.4L cash flow", "815 score"].map((item) => (
+              <div className="glass-band rounded-2xl p-3 text-center text-sm font-black text-forest" key={item}>{item}</div>
+            ))}
+          </div>
         </div>
 
-        <div className="card overflow-hidden">
-          <div className="border-b border-line bg-wheat p-5">
+        <div className="card interactive-card relative overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
+          <div className="border-b border-line bg-gradient-to-r from-mint via-wheat to-saffron/40 p-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-moss/30 bg-white px-4 py-2 font-bold text-forest">
               <BadgeCheck size={18} /> Chain verified
             </div>
           </div>
           <div className="grid gap-4 p-6">
-            <div className="rounded-2xl bg-white p-5">
+            <div className="rounded-2xl bg-white p-5 shadow-soft">
               <p className="eyebrow">Credit score</p>
               <div className="mt-2 flex items-end justify-between">
                 <strong className="text-6xl font-black">815</strong>
@@ -52,7 +83,7 @@ export default function LandingPage() {
               </div>
             </div>
             {[0, 1, 2].map((item) => (
-              <div key={item} className="flex items-center justify-between rounded-xl border border-line bg-panel p-4">
+              <div key={item} className="flex items-center justify-between rounded-xl border border-line bg-panel p-4 transition hover:translate-x-1 hover:border-moss">
                 <span className="flex items-center gap-2 font-bold"><Boxes size={18} /> Block #{item + 28}</span>
                 <code className="text-sm text-slate-600">31bbc423...1a4703</code>
               </div>
@@ -62,13 +93,56 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-4 px-6 pb-12 md:grid-cols-5">
-        {features.map(({ icon: Icon, title, body }) => (
-          <article className="card p-5" key={title}>
-            <Icon className="text-moss" />
+        {features.map(({ icon: Icon, title, tone, body }) => (
+          <article className="card interactive-card p-5" key={title}>
+            <div className={`grid h-12 w-12 place-items-center rounded-2xl ${tone}`}>
+              <Icon className="text-forest" />
+            </div>
             <h2 className="mt-4 text-xl font-black">{title}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
           </article>
         ))}
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-5 px-6 pb-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="card interactive-card bg-gradient-to-br from-forest to-moss p-7 text-white">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-white/70">How it moves</p>
+          <h2 className="mt-3 text-4xl font-black">Interactive business flow</h2>
+          <div className="mt-8 grid gap-4">
+            {[
+              { icon: ReceiptText, label: "Add a transaction" },
+              { icon: Boxes, label: "Mint a SHA-256 block" },
+              { icon: CircleDollarSign, label: "Update credit score" },
+              { icon: Zap, label: "Unlock loan readiness" }
+            ].map(({ icon: Icon, label }, index) => (
+              <div className="flex items-center gap-4 rounded-2xl bg-white/12 p-4 transition hover:bg-white/20" key={label}>
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white text-forest"><Icon size={20} /></span>
+                <strong>{index + 1}. {label}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card p-7">
+          <div className="mb-5 flex items-center gap-3">
+            <HelpCircle className="text-moss" />
+            <div>
+              <p className="eyebrow">FAQ</p>
+              <h2 className="text-3xl font-black">Know the site</h2>
+            </div>
+          </div>
+          <div className="grid gap-3">
+            {faqs.map((faq) => (
+              <details className="group rounded-2xl border border-line bg-white p-5 transition open:border-moss open:bg-mint/40" key={faq.question}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-black">
+                  {faq.question}
+                  <ChevronRight className="shrink-0 transition group-open:rotate-90" size={20} />
+                </summary>
+                <p className="mt-3 leading-7 text-slate-600">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
     </main>
   );
