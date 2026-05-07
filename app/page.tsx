@@ -70,9 +70,9 @@ export default function LandingPage() {
           <div className="floating-cube cube-one"><Boxes size={28} /></div>
           <div className="floating-cube cube-two"><HandCoins size={28} /></div>
           <div className="floating-cube cube-three"><Sparkles size={26} /></div>
-        <div className="card interactive-card card-3d relative overflow-hidden">
+        <div className="card interactive-card card-3d hero-map-card relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
-          <div className="hero-map-banner border-b border-line">
+          <div className="hero-map-banner">
             <svg className="hero-india-map" viewBox="0 0 430 520" role="img" aria-label="India outline with MSME Saathi logo">
               <path d="M170 9 154 17 148 33 159 45 152 60 131 62 121 75 128 96 115 106 91 112 84 129 64 139 72 157 54 174 68 190 56 207 38 208 31 229 47 240 33 252 45 265 70 262 80 276 70 289 82 304 75 320 84 336 85 358 96 375 101 401 117 421 126 452 145 485 164 504 181 499 196 464 206 427 225 402 253 388 275 359 300 343 315 320 339 309 336 284 354 265 347 245 361 219 346 199 322 194 306 176 283 172 269 154 249 159 233 140 210 136 203 112 186 104 191 84 181 67 198 55 194 38 211 29 197 14Z" />
               <path d="M168 9 188 2 210 17 229 14 246 31 237 48 215 44 198 55 181 67 159 45 148 33Z" />
@@ -89,21 +89,6 @@ export default function LandingPage() {
             <div className="hero-map-logo">
               <Image src="/msme-saathi-logo.png" alt="MSME Saathi logo" width={150} height={110} />
             </div>
-          </div>
-          <div className="grid gap-4 p-6">
-            <div className="rounded-2xl bg-white p-5 shadow-soft">
-              <p className="eyebrow">Credit score</p>
-              <div className="mt-2 flex items-end justify-between">
-                <strong className="text-6xl font-black">815</strong>
-                <span className="rounded-full bg-violet-50 px-4 py-2 font-bold text-forest">Excellent</span>
-              </div>
-            </div>
-            {[0, 1, 2].map((item) => (
-              <div key={item} className="flex items-center justify-between rounded-xl border border-line bg-panel p-4 transition hover:translate-x-1 hover:border-moss">
-                <span className="flex items-center gap-2 font-bold"><Boxes size={18} /> Block #{item + 28}</span>
-                <code className="text-sm text-slate-600">31bbc423...1a4703</code>
-              </div>
-            ))}
           </div>
         </div>
         </div>
