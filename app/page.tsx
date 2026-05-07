@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
+import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, MapPin, ReceiptText, ShieldCheck, Sparkles, TrendingUp, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -10,27 +10,17 @@ const features = [
   { icon: BrainCircuit, title: "AI insights", tone: "bg-white", body: "Generate deterministic local recommendations with no API key required." }
 ];
 
-const faqs = [
-  {
-    question: "What is msmeSaathi?",
-    answer: "msmeSaathi is a microfinance dashboard for small businesses. It tracks business transactions, creates private blockchain blocks, calculates credit scores, and supports loan and supply-chain workflows."
-  },
-  {
-    question: "Do I need a crypto wallet?",
-    answer: "No. The app uses a wallet-free private ledger simulation. Blocks are linked with SHA-256 hashes, so users can understand blockchain-style auditability without handling tokens or wallets."
-  },
-  {
-    question: "Will my data persist?",
-    answer: "Yes. When Supabase or PostgreSQL environment variables are not configured, the app stores demo and user-created data in browser localStorage."
-  },
-  {
-    question: "How is the credit score calculated?",
-    answer: "The score uses transaction volume, transaction count, active months, positive cash flow, repayment history, and default penalties. The methodology is visible on the Credit Score page."
-  },
-  {
-    question: "Can this connect to a real backend?",
-    answer: "Yes. The project includes typed models, a Supabase client helper, and a PostgreSQL-ready schema in supabase/schema.sql."
-  }
+const msmeRegions = [
+  { region: "North", city: "Delhi NCR", growth: "+18%", x: "42%", y: "24%", size: "h-5 w-5" },
+  { region: "West", city: "Ahmedabad", growth: "+22%", x: "28%", y: "46%", size: "h-6 w-6" },
+  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "34%", y: "58%", size: "h-7 w-7" },
+  { region: "South", city: "Bengaluru", growth: "+31%", x: "48%", y: "74%", size: "h-7 w-7" },
+  { region: "South", city: "Chennai", growth: "+19%", x: "58%", y: "78%", size: "h-5 w-5" },
+  { region: "East", city: "Kolkata", growth: "+16%", x: "72%", y: "49%", size: "h-5 w-5" },
+  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "48%", y: "48%", size: "h-6 w-6" },
+  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "52%", y: "62%", size: "h-6 w-6" },
+  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "35%", y: "35%", size: "h-5 w-5" },
+  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "84%", y: "37%", size: "h-4 w-4" }
 ];
 
 export default function LandingPage() {
@@ -143,24 +133,43 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="card p-7">
+        <div className="card map-card-3d overflow-hidden p-7">
           <div className="mb-5 flex items-center gap-3">
-            <HelpCircle className="text-moss" />
+            <MapPin className="text-moss" />
             <div>
-              <p className="eyebrow">FAQ</p>
-              <h2 className="text-3xl font-black">Know the site</h2>
+              <p className="eyebrow">India MSME growth</p>
+              <h2 className="text-3xl font-black">Regional demand map</h2>
             </div>
           </div>
-          <div className="grid gap-3">
-            {faqs.map((faq) => (
-              <details className="group rounded-2xl border border-line bg-white p-5 transition open:border-moss open:bg-mint/40" key={faq.question}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-black">
-                  {faq.question}
-                  <ChevronRight className="shrink-0 transition group-open:rotate-90" size={20} />
-                </summary>
-                <p className="mt-3 leading-7 text-slate-600">{faq.answer}</p>
-              </details>
-            ))}
+          <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
+            <div className="india-map-stage">
+              <svg className="india-map-outline" viewBox="0 0 320 380" role="img" aria-label="Stylized map of India">
+                <path d="M126 18 98 42l4 35-28 16 14 33-32 28 18 38-26 36 35 25-5 47 42 10 24 50 32-39 39 33 18-52 43-22-20-40 27-34-31-25 18-48-48-12-14-40-41-6-21-33Z" />
+              </svg>
+              {msmeRegions.map((region, index) => (
+                <div
+                  className="map-dot-wrap"
+                  key={region.city}
+                  style={{ left: region.x, top: region.y, animationDelay: `${index * 160}ms` }}
+                >
+                  <span className={`map-dot ${region.size}`} />
+                  <span className="map-dot-label">{region.growth}</span>
+                </div>
+              ))}
+            </div>
+            <div className="grid content-center gap-3">
+              {msmeRegions.slice(0, 6).map((region) => (
+                <div className="flex items-center justify-between rounded-2xl border border-line bg-white/75 p-3 shadow-soft" key={region.city}>
+                  <div>
+                    <strong className="block">{region.city}</strong>
+                    <span className="text-sm text-slate-600">{region.region} cluster</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-3 py-1 font-black text-forest">
+                    <TrendingUp size={15} /> {region.growth}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
