@@ -82,11 +82,6 @@ export default function LandingPage() {
               <span>On-chain loan request review, eligibility rules, credit checks, and funding decisions.</span>
             </article>
           </div>
-          <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
-            {["30 blocks", "INR 4.4L cash flow", "815 score"].map((item) => (
-              <div className="glass-band rounded-2xl p-3 text-center text-sm font-black text-forest" key={item}>{item}</div>
-            ))}
-          </div>
         </div>
 
         <div className="hero-3d-stage">
