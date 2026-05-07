@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, MapPin, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
+import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -10,17 +10,27 @@ const features = [
   { icon: BrainCircuit, title: "AI insights", tone: "bg-white", body: "Generate deterministic local recommendations with no API key required." }
 ];
 
-const msmeRegions = [
-  { region: "North", city: "Delhi NCR", growth: "+18%", x: "43%", y: "30%" },
-  { region: "West", city: "Ahmedabad", growth: "+22%", x: "28%", y: "46%" },
-  { region: "West Coast", city: "Mumbai-Pune", growth: "+26%", x: "34%", y: "57%" },
-  { region: "South", city: "Bengaluru", growth: "+31%", x: "45%", y: "76%" },
-  { region: "South", city: "Chennai", growth: "+19%", x: "55%", y: "80%" },
-  { region: "East", city: "Kolkata", growth: "+16%", x: "69%", y: "50%" },
-  { region: "Central", city: "Indore-Bhopal", growth: "+21%", x: "45%", y: "49%" },
-  { region: "Deccan", city: "Hyderabad", growth: "+24%", x: "50%", y: "65%" },
-  { region: "Northwest", city: "Jaipur", growth: "+17%", x: "35%", y: "37%" },
-  { region: "Northeast", city: "Guwahati", growth: "+14%", x: "82%", y: "36%" }
+const faqs = [
+  {
+    question: "What can I do on msmeSaathi?",
+    answer: "You can create a business profile, record transactions, view a private blockchain ledger, calculate credit score, request loans, track purchase orders, and generate local AI-style insights."
+  },
+  {
+    question: "Does every action create a block?",
+    answer: "Important business events such as transactions, loan requests, repayments, suppliers, purchase orders, and shipment updates are added as SHA-256 linked blocks."
+  },
+  {
+    question: "How does loan approval work?",
+    answer: "Loan readiness is based on the credit score and monthly net cash flow. Higher score bands unlock higher working-capital limits."
+  },
+  {
+    question: "Can I use it without a backend?",
+    answer: "Yes. The app keeps working with localStorage fallback data, so forms and dashboard activity persist in the browser."
+  },
+  {
+    question: "What is the AI Insights page?",
+    answer: "It generates deterministic local recommendations for credit improvement, supply chain risks, working capital, and loan readiness without needing an API key."
+  }
 ];
 
 export default function LandingPage() {
@@ -133,53 +143,24 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="card map-card-3d overflow-hidden p-7">
+        <div className="card faq-card-3d p-7">
           <div className="mb-5 flex items-center gap-3">
-            <MapPin className="text-moss" />
+            <HelpCircle className="text-moss" />
             <div>
-              <p className="eyebrow">India MSME growth</p>
-              <h2 className="text-3xl font-black">Regional demand map</h2>
+              <p className="eyebrow">FAQ</p>
+              <h2 className="text-3xl font-black">Know the site</h2>
             </div>
           </div>
-          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.9fr]">
-            <div className="india-map-stage">
-              <svg className="india-map-outline" viewBox="0 0 430 520" role="img" aria-label="India outline map with MSME growth markers">
-                <path className="india-mainland" d="M170 9 154 17 148 33 159 45 152 60 131 62 121 75 128 96 115 106 91 112 84 129 64 139 72 157 54 174 68 190 56 207 38 208 31 229 47 240 33 252 45 265 70 262 80 276 70 289 82 304 75 320 84 336 85 358 96 375 101 401 117 421 126 452 145 485 164 504 181 499 196 464 206 427 225 402 253 388 275 359 300 343 315 320 339 309 336 284 354 265 347 245 361 219 346 199 322 194 306 176 283 172 269 154 249 159 233 140 210 136 203 112 186 104 191 84 181 67 198 55 194 38 211 29 197 14Z" />
-                <path className="india-kashmir" d="M168 9 188 2 210 17 229 14 246 31 237 48 215 44 198 55 181 67 159 45 148 33Z" />
-                <path className="india-northeast" d="M316 176 345 156 371 126 401 131 409 154 393 171 413 184 396 205 365 211 346 199 322 194Z" />
-                <path className="india-ne-connector" d="M300 177 316 176" />
-                <path className="india-coast-detail" d="M82 304c-8 32-1 66 17 95M102 421c7 20 20 43 39 70M206 427c23-33 50-53 86-79M336 284c-6 19-19 36-35 58" />
-                <circle className="india-island lakshadweep" cx="82" cy="429" r="2.4" />
-                <circle className="india-island lakshadweep" cx="91" cy="446" r="2.1" />
-                <circle className="india-island andaman" cx="346" cy="389" r="2.3" />
-                <circle className="india-island andaman" cx="351" cy="407" r="2.1" />
-                <circle className="india-island andaman" cx="357" cy="427" r="2" />
-                <circle className="india-island andaman" cx="363" cy="450" r="1.9" />
-                <circle className="india-island andaman" cx="368" cy="474" r="1.8" />
-              </svg>
-              {msmeRegions.map((region, index) => (
-                <div
-                  className="map-dot-wrap"
-                  key={region.city}
-                  style={{ left: region.x, top: region.y, animationDelay: `${index * 160}ms` }}
-                >
-                  <span className="ashoka-dot" />
-                  <span className="map-dot-label">{region.growth}</span>
-                </div>
-              ))}
-            </div>
-            <div className="msme-timeline">
-              {msmeRegions.map((region, index) => (
-                <div className="timeline-item" key={region.city}>
-                  <span className="timeline-node">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="timeline-copy">
-                    <strong>{region.city}</strong>
-                    <span>{region.region} cluster</span>
-                  </div>
-                  <b>{region.growth}</b>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-3">
+            {faqs.map((faq) => (
+              <details className="faq-item group" key={faq.question}>
+                <summary>
+                  <span>{faq.question}</span>
+                  <ChevronRight className="shrink-0 transition group-open:rotate-90" size={20} />
+                </summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
