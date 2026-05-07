@@ -1,6 +1,6 @@
 export type TransactionType = "sale" | "purchase" | "expense";
 export type ShipmentStatus = "created" | "dispatched" | "in_transit" | "delivered";
-export type LoanStatus = "approved" | "rejected" | "active" | "partially_repaid" | "repaid";
+export type LoanStatus = "pending" | "approved" | "rejected" | "active" | "partially_repaid" | "repaid";
 
 export type UserProfile = {
   id: string;

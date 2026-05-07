@@ -246,8 +246,7 @@ function LoansPage({ state, credit, update }: { state: AppState; credit: ReturnT
   async function requestLoan(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const requested = Number(amount);
-    const bankEligible = credit.creditScore >= selectedBank.minScore && requested <= selectedBank.maxTicket;
-    const loan: Loan = { id: crypto.randomUUID(), bankId: selectedBank.id, bankName: selectedBank.name, amount: requested, approvedAmount: Math.min(requested, limit.limit, selectedBank.maxTicket), interestRate: selectedBank.interestRate, termMonths: 12, repaid: 0, status: limit.approved && bankEligible && requested <= limit.limit ? "approved" : "rejected", requestedAt: new Date().toISOString() };
+    const loan: Loan = { id: crypto.randomUUID(), bankId: selectedBank.id, bankName: selectedBank.name, amount: requested, approvedAmount: Math.min(requested, limit.limit, selectedBank.maxTicket), interestRate: selectedBank.interestRate, termMonths: 12, repaid: 0, status: "pending", requestedAt: new Date().toISOString() };
     update(async (current) => ({ ...current, loans: [loan, ...current.loans], blocks: [...current.blocks, await createBlock(current.blocks, "loan_requested", loan)] }));
     setAmount("");
   }
@@ -286,7 +285,10 @@ function LoansPage({ state, credit, update }: { state: AppState; credit: ReturnT
         })}
       </section>
       <form onSubmit={requestLoan} className="card mb-6 grid gap-4 p-5 md:grid-cols-[1fr_auto]"><label className="field"><span>Requested amount from {selectedBank.name}</span><input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} required /></label><button className="btn-primary self-end" type="submit"><Plus size={18} /> Request loan</button><p className="text-slate-600 md:col-span-2">Policy limit: {limit.approved ? money.format(Math.min(limit.limit, selectedBank.maxTicket)) : "Rejected below 550 score"} · Your score {credit.creditScore} · {selectedBank.name} minimum {selectedBank.minScore}</p></form>
-      <section className="grid gap-5">{state.loans.map((loan) => <article className="card p-5" key={loan.id}><div className="flex flex-wrap justify-between gap-4"><div><span className="rounded-full bg-wheat px-4 py-2 font-bold">{loan.status}</span><h2 className="mt-4 text-3xl font-black">{money.format(loan.amount)} · {loan.termMonths} months</h2><p className="text-slate-600">{loan.bankName ?? "Partner Bank"} · Approved {money.format(loan.approvedAmount)} · {loan.interestRate}% interest · Repaid {money.format(loan.repaid)}</p></div><div className="flex gap-2"><input className="rounded-xl border border-line px-4" placeholder="Repayment" value={repay} onChange={(e) => setRepay(e.target.value)} /><button className="btn-primary" onClick={() => repayLoan(loan.id)}>Repay</button></div></div></article>)}</section>
+      <section className="grid gap-5">{state.loans.map((loan) => {
+        const canRepay = ["approved", "active", "partially_repaid"].includes(loan.status) && loan.approvedAmount > 0;
+        return <article className="card p-5" key={loan.id}><div className="flex flex-wrap justify-between gap-4"><div><span className="rounded-full bg-wheat px-4 py-2 font-bold">{loan.status}</span><h2 className="mt-4 text-3xl font-black">{money.format(loan.amount)} · {loan.termMonths} months</h2><p className="text-slate-600">{loan.bankName ?? "Partner Bank"} · Bank decision: {loan.status} · Approved {money.format(loan.approvedAmount)} · {loan.interestRate}% interest · Repaid {money.format(loan.repaid)}</p></div>{canRepay && <div className="flex gap-2"><input className="rounded-xl border border-line px-4" placeholder="Repayment" value={repay} onChange={(e) => setRepay(e.target.value)} /><button className="btn-primary" onClick={() => repayLoan(loan.id)}>Repay</button></div>}</div></article>;
+      })}</section>
     </>
   );
 }

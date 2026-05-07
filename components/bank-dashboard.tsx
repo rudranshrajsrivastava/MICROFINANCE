@@ -59,6 +59,7 @@ export function BankDashboard() {
   const loanBlocks = state.blocks.filter((block) => block.eventType.includes("loan") || block.eventType.includes("bank"));
   const bankCode = bank?.lenderCode ?? "BANK-001";
   const bankLoans = state.loans.filter((loan) => (loan.bankId ?? "BANK-001") === bankCode);
+  const pendingLoans = bankLoans.filter((loan) => loan.status === "pending");
   const lent = bankLoans.filter((loan) => loan.status !== "rejected").reduce((sum, loan) => sum + loan.approvedAmount, 0);
   const returned = bankLoans.reduce((sum, loan) => sum + loan.repaid, 0);
   const outstanding = Math.max(0, lent - returned);
@@ -122,7 +123,7 @@ export function BankDashboard() {
       </section>
 
       <section className="mx-auto mt-6 grid max-w-7xl gap-5 lg:grid-cols-4">
-        <BankMetric icon={HandCoins} label="Amount lent" value={money.format(lent)} note={`${bankLoans.length} linked requests`} />
+        <BankMetric icon={HandCoins} label="Amount lent" value={money.format(lent)} note={`${pendingLoans.length} pending requests`} />
         <BankMetric icon={BadgeCheck} label="Amount returned" value={money.format(returned)} note="Updated when MSME repays" />
         <BankMetric icon={ArrowUpRight} label="Outstanding" value={money.format(outstanding)} note="Live bank exposure" />
         <BankMetric icon={Boxes} label="Loan blocks" value={String(loanBlocks.length)} note={valid ? "Verified chain" : "Invalid chain"} />
@@ -176,7 +177,12 @@ export function BankDashboard() {
             </span>
           </div>
           <div className="grid gap-4">
-            {state.loans.map((loan) => (
+            {pendingLoans.length === 0 && (
+              <div className="rounded-2xl border border-line bg-wheat/70 p-5 text-slate-600">
+                No pending loan requests. Approved or rejected requests are cleared from this desk and remain visible in the MSME account.
+              </div>
+            )}
+            {pendingLoans.map((loan) => (
               <article className="bank-loan-row" key={loan.id}>
                 <div>
                   <span className="rounded-full bg-wheat px-3 py-1 text-sm font-black">{loan.status}</span>
