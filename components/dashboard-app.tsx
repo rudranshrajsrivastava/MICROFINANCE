@@ -159,7 +159,7 @@ function Overview({ credit, sales, purchases, activeLoans, inTransit, blocks }: 
           <p className="eyebrow">Credit score</p>
           <div className="mt-6 grid gap-6 md:grid-cols-[1fr_220px]">
             <div><strong className="block text-6xl font-black">{credit.creditScore}</strong><p className="mt-3 text-xl text-slate-600">Tier · <span className="font-bold text-forest">{credit.tier}</span></p></div>
-            <div className="grid aspect-square place-items-center rounded-full" style={{ background: `radial-gradient(circle, #fbfaf6 58%, transparent 60%), conic-gradient(#467f5a ${((credit.creditScore - 300) / 600) * 270}deg, #ebe5d8 0 270deg, transparent 0)` }}><CircleDollarSign className="text-moss" size={42} /></div>
+            <div className="grid aspect-square place-items-center rounded-full" style={{ background: `radial-gradient(circle, #ffffff 58%, transparent 60%), conic-gradient(#8b5cf6 ${((credit.creditScore - 300) / 600) * 270}deg, #dbeafe 0 270deg, transparent 0)` }}><CircleDollarSign className="text-moss" size={42} /></div>
           </div>
         </article>
         <Metric icon={ReceiptText} label="Sales" value={money.format(sales)} note={`${credit.transactionCount} total transactions`} />
@@ -207,7 +207,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: Array<Array<str
 function LedgerPage({ state, valid }: { state: AppState; valid: boolean }) {
   return (
     <>
-      <Header eyebrow="Immutable record" title="Blockchain Ledger" subtitle="Each block contains index, timestamp, event type, payload, previous hash, and current hash." action={<span className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 font-bold ${valid ? "border-emerald-200 bg-emerald-50 text-forest" : "border-red-200 bg-red-50 text-rust"}`}>{valid ? <CheckCircle2 size={18} /> : <XCircle size={18} />} {valid ? "Chain verified" : "Chain invalid"}</span>} />
+      <Header eyebrow="Immutable record" title="Blockchain Ledger" subtitle="Each block contains index, timestamp, event type, payload, previous hash, and current hash." action={<span className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 font-bold ${valid ? "border-violet-200 bg-violet-50 text-forest" : "border-red-200 bg-red-50 text-rust"}`}>{valid ? <CheckCircle2 size={18} /> : <XCircle size={18} />} {valid ? "Chain verified" : "Chain invalid"}</span>} />
       <section className="grid gap-5">
         {state.blocks.map((block) => <article className="card p-5" key={block.id}><div className="flex flex-wrap justify-between gap-3"><div className="flex flex-wrap items-center gap-3"><span className="rounded-full bg-wheat px-4 py-2 font-bold">#{block.index}</span><span>{new Date(block.timestamp).toLocaleString()}</span><span className="rounded-full border border-line px-4 py-2 font-bold">{block.eventType}</span></div><code className="flex items-center gap-2 text-slate-600"><LinkIcon size={16} /> prev: {shortHash(block.previousHash)}</code></div><div className="mt-5 grid gap-4 xl:grid-cols-2"><div><p className="eyebrow">Current hash</p><code className="mt-2 block break-all">{block.currentHash}</code></div><div><p className="eyebrow">Payload</p><pre className="mt-2 overflow-auto rounded-xl bg-wheat p-4 text-sm">{JSON.stringify(block.payload, null, 2)}</pre></div></div></article>)}
       </section>

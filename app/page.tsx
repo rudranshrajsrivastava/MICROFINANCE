@@ -83,7 +83,7 @@ export default function LandingPage() {
               <p className="eyebrow">Credit score</p>
               <div className="mt-2 flex items-end justify-between">
                 <strong className="text-6xl font-black">815</strong>
-                <span className="rounded-full bg-emerald-50 px-4 py-2 font-bold text-forest">Excellent</span>
+                <span className="rounded-full bg-violet-50 px-4 py-2 font-bold text-forest">Excellent</span>
               </div>
             </div>
             {[0, 1, 2].map((item) => (
