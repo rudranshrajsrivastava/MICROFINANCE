@@ -44,8 +44,7 @@ export default function LandingPage() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Brand />
         <div className="hidden items-center gap-3 sm:flex">
-          <Link className="btn-ghost" href="/sign-in">User Sign In</Link>
-          <Link className="btn-ghost" href="/sign-in?role=bank">Bank Sign In</Link>
+          <Link className="btn-ghost" href="/sign-in">Sign In</Link>
           <Link className="btn-primary" href="/sign-up">Sign Up</Link>
         </div>
       </nav>
@@ -65,8 +64,7 @@ export default function LandingPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up"><Store size={20} /> User Sign Up <ChevronRight size={20} /></Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in">User Sign In</Link>
-            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in?role=bank"><Landmark size={20} /> Bank Sign In</Link>
+            <Link className="btn-ghost min-h-14 px-6 text-lg" href="/sign-in"><Landmark size={20} /> Sign In</Link>
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/user">User Page</Link>
             <Link className="btn-ghost min-h-14 px-6 text-lg" href="/bank">Bank Page</Link>
           </div>

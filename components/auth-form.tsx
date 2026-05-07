@@ -64,12 +64,12 @@ export function AuthForm({ mode, initialRole = "msme" }: { mode: "sign-in" | "si
       <form onSubmit={submit} className="auth-card-3d card w-full max-w-5xl overflow-hidden p-0">
         <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
           <section className="auth-side-panel p-7">
-            <p className="eyebrow">Choose portal</p>
+            <p className="eyebrow">Choose sign in type</p>
             <h1 className="mt-3 text-4xl font-black">{bank ? "Bank loan desk." : signup ? "Start your MSME ledger." : "Sign in to MSME Saathi."}</h1>
             <p className="mt-4 leading-7 text-slate-600">
               {bank
                 ? "Review loan requests minted on-chain, inspect credit score, configure eligibility, and provide funding decisions."
-                : "Build a verified ledger for transactions, credit score, loan readiness, and supply chain activity."}
+                : "Sign in as an MSME user to manage transactions, credit score, loans, repayments, and supply chain activity."}
             </p>
             <div className="mt-6 grid gap-3">
               <button type="button" className={`role-card ${!bank ? "role-card-active" : ""}`} onClick={() => setRole("msme")}>
