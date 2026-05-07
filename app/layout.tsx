@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "msmeSaathi",
+  title: "MSME Saathi",
   description: "Blockchain-backed microfinance dashboard for MSMEs"
 };
 

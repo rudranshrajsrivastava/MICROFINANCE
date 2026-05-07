@@ -12,7 +12,7 @@ const features = [
 
 const faqs = [
   {
-    question: "What can I do on msmeSaathi?",
+    question: "What can I do on MSME Saathi?",
     answer: "You can create a business profile, record transactions, view a private blockchain ledger, calculate credit score, request loans, track purchase orders, and generate local AI-style insights."
   },
   {
@@ -55,7 +55,7 @@ export default function LandingPage() {
             <span>on one verified ledger.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-slate-600">
-            msmeSaathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
+            MSME Saathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up">Start free <ChevronRight size={20} /></Link>
