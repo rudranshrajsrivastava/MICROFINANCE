@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
@@ -81,12 +80,10 @@ export default function LandingPage() {
         <div className="card interactive-card card-3d hero-growth-card relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
           <div className="hero-growth-panel">
-            <div className="hero-growth-logo">
-              <Image src="/msme-saathi-logo.png" alt="MSME Saathi logo" width={150} height={110} />
-            </div>
             <div className="hero-growth-header">
               <p className="eyebrow">City growth pulse</p>
               <h2>MSME growth across active clusters</h2>
+              <p>Track where transaction volume, credit readiness, and supplier activity are rising fastest.</p>
             </div>
             <div className="city-growth-list">
               {cityGrowth.map((item) => (
