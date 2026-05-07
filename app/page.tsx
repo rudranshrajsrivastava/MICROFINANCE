@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Truck, Zap } from "lucide-react";
+import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -12,8 +12,8 @@ const features = [
 
 const faqs = [
   {
-    question: "What is MSME Chain?",
-    answer: "MSME Chain is a microfinance dashboard for small businesses. It tracks business transactions, creates private blockchain blocks, calculates credit scores, and supports loan and supply-chain workflows."
+    question: "What is msmeSaathi?",
+    answer: "msmeSaathi is a microfinance dashboard for small businesses. It tracks business transactions, creates private blockchain blocks, calculates credit scores, and supports loan and supply-chain workflows."
   },
   {
     question: "Do I need a crypto wallet?",
@@ -53,7 +53,7 @@ export default function LandingPage() {
             Credit, loans, and supply chain proof on one verified ledger.
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-slate-600">
-            MSME Chain is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
+            msmeSaathi is a full-stack-ready fintech app where businesses can sign up, record transactions, mint private SHA-256 blocks, calculate credit scores, request loans, and manage shipments.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary min-h-14 px-6 text-lg" href="/sign-up">Start free <ChevronRight size={20} /></Link>
@@ -67,7 +67,11 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="card interactive-card relative overflow-hidden">
+        <div className="hero-3d-stage">
+          <div className="floating-cube cube-one"><Boxes size={28} /></div>
+          <div className="floating-cube cube-two"><HandCoins size={28} /></div>
+          <div className="floating-cube cube-three"><Sparkles size={26} /></div>
+        <div className="card interactive-card card-3d relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
           <div className="border-b border-line bg-gradient-to-r from-mint via-wheat to-saffron/40 p-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-moss/30 bg-white px-4 py-2 font-bold text-forest">
@@ -90,11 +94,12 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-4 px-6 pb-12 md:grid-cols-5">
         {features.map(({ icon: Icon, title, tone, body }) => (
-          <article className="card interactive-card p-5" key={title}>
+          <article className="card interactive-card card-3d p-5" key={title}>
             <div className={`grid h-12 w-12 place-items-center rounded-2xl ${tone}`}>
               <Icon className="text-forest" />
             </div>
@@ -105,7 +110,7 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-5 px-6 pb-14 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="card interactive-card bg-gradient-to-br from-forest to-moss p-7 text-white">
+        <div className="card interactive-card card-3d bg-gradient-to-br from-forest to-moss p-7 text-white">
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-white/70">How it moves</p>
           <h2 className="mt-3 text-4xl font-black">Interactive business flow</h2>
           <div className="mt-8 grid gap-4">

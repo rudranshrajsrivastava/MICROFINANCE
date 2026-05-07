@@ -1,4 +1,4 @@
-# MSME Chain
+# msmeSaathi
 
 A complete Next.js MSME microfinance platform with wallet-free private blockchain simulation, on-chain credit scoring, loan workflows, supply-chain tracking, deterministic local AI insights, and localStorage persistence when backend environment variables are not configured.
 
