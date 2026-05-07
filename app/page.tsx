@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BadgeCheck, Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
+import Image from "next/image";
+import { Boxes, BrainCircuit, ChevronRight, CircleDollarSign, HandCoins, HelpCircle, ReceiptText, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
 import { Brand } from "@/components/brand";
 
 const features = [
@@ -71,9 +72,22 @@ export default function LandingPage() {
           <div className="floating-cube cube-three"><Sparkles size={26} /></div>
         <div className="card interactive-card card-3d relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-shine" />
-          <div className="border-b border-line bg-gradient-to-r from-mint via-wheat to-saffron/40 p-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-moss/30 bg-white px-4 py-2 font-bold text-forest">
-              <BadgeCheck size={18} /> Chain verified
+          <div className="hero-map-banner border-b border-line">
+            <svg className="hero-india-map" viewBox="0 0 430 520" role="img" aria-label="India outline with MSME Saathi logo">
+              <path d="M170 9 154 17 148 33 159 45 152 60 131 62 121 75 128 96 115 106 91 112 84 129 64 139 72 157 54 174 68 190 56 207 38 208 31 229 47 240 33 252 45 265 70 262 80 276 70 289 82 304 75 320 84 336 85 358 96 375 101 401 117 421 126 452 145 485 164 504 181 499 196 464 206 427 225 402 253 388 275 359 300 343 315 320 339 309 336 284 354 265 347 245 361 219 346 199 322 194 306 176 283 172 269 154 249 159 233 140 210 136 203 112 186 104 191 84 181 67 198 55 194 38 211 29 197 14Z" />
+              <path d="M168 9 188 2 210 17 229 14 246 31 237 48 215 44 198 55 181 67 159 45 148 33Z" />
+              <path d="M316 176 345 156 371 126 401 131 409 154 393 171 413 184 396 205 365 211 346 199 322 194Z" />
+              <path className="map-connector" d="M300 177 316 176" />
+              <circle cx="82" cy="429" r="2.4" />
+              <circle cx="91" cy="446" r="2.1" />
+              <circle cx="346" cy="389" r="2.3" />
+              <circle cx="351" cy="407" r="2.1" />
+              <circle cx="357" cy="427" r="2" />
+              <circle cx="363" cy="450" r="1.9" />
+              <circle cx="368" cy="474" r="1.8" />
+            </svg>
+            <div className="hero-map-logo">
+              <Image src="/msme-saathi-logo.png" alt="MSME Saathi logo" width={150} height={110} />
             </div>
           </div>
           <div className="grid gap-4 p-6">

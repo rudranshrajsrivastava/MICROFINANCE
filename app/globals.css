@@ -88,6 +88,63 @@ select {
     perspective: 1100px;
   }
 
+  .hero-map-banner {
+    position: relative;
+    display: grid;
+    min-height: 220px;
+    place-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9), transparent 8rem),
+      linear-gradient(135deg, rgba(255, 153, 51, 0.12), rgba(237, 233, 254, 0.62) 44%, rgba(19, 136, 8, 0.1));
+  }
+
+  .hero-india-map {
+    position: absolute;
+    inset: -18% 10% -20% 10%;
+    width: 80%;
+    height: 138%;
+    opacity: 0.42;
+    filter: drop-shadow(0 18px 22px rgba(15, 23, 42, 0.14));
+    transform: rotateX(5deg) rotateY(-4deg) translateZ(16px);
+  }
+
+  .hero-india-map path,
+  .hero-india-map circle {
+    fill: rgba(255, 255, 255, 0.96);
+    stroke: rgba(0, 0, 128, 0.72);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .hero-india-map .map-connector {
+    fill: none;
+    stroke-dasharray: 3 5;
+  }
+
+  .hero-map-logo {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 10.5rem;
+    height: 8rem;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(231, 223, 245, 0.95);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset -12px -12px 22px rgba(79, 70, 229, 0.08), inset 10px 10px 18px rgba(255, 255, 255, 0.8), 0 24px 42px rgba(79, 70, 229, 0.2);
+    transform: translateZ(42px) rotateX(4deg) rotateY(-5deg);
+  }
+
+  .hero-map-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.2);
+  }
+
   .motion-headline {
     display: grid;
     gap: 0.08em;
